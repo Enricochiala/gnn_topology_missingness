@@ -1,0 +1,41 @@
+{
+  "zero_policy": "zero speed treated as missing by official loader",
+  "directed": true,
+  "dataset": "pems_bay",
+  "shape": [
+    52128,
+    325,
+    1
+  ],
+  "original_nonfinite_fraction": 0.00023020257826887662,
+  "benchmark_missing_fraction": 0.0002609552816735137,
+  "zero_fraction": 3.075270340463711e-05,
+  "directed_edges": 2369,
+  "components": 7,
+  "details": [
+    24,
+    12
+  ],
+  "first_timestamp": "2017-01-01 00:00:00",
+  "last_timestamp": "2017-06-30 23:55:00",
+  "prepared_sha256": "e55b5c4e6498625cd8d3cf272393541cf7ae2d66755fba0704ced6ff440585e6",
+  "split_bounds": [
+    [
+      0,
+      36489
+    ],
+    [
+      36489,
+      41702
+    ],
+    [
+      41702,
+      52128
+    ]
+  ],
+  "windows_stride_horizon": [
+    3038,
+    432,
+    866
+  ]
+}

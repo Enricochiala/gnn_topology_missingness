@@ -1,0 +1,32 @@
+[
+  {
+    "file": "engrad.h5",
+    "url": "https://zenodo.org/api/records/12760772/files/data.h5/content",
+    "bytes": 111072613,
+    "sha256": "def91d72907ea6a594af00f45c676c07ce5db48dcc1685fc41348c0a675f3d59"
+  },
+  {
+    "file": "aqi.zip",
+    "url": "https://drive.switch.ch/index.php/s/W0fRqotjHxIndPj/download",
+    "bytes": 31423260,
+    "sha256": "95d3c5cab14fc007f43c57b745a93e5f88201cbb92a755644ca9777848343317"
+  },
+  {
+    "file": "pv_us.h5",
+    "url": "https://drive.switch.ch/index.php/s/HRPNJdeAzeQLA1f/download",
+    "bytes": 66293871,
+    "sha256": "524fa2247f80a1f1f371488761e2378730b29b1ca4d68604d3102634e234ee26"
+  },
+  {
+    "file": "metr_la.zip",
+    "url": "https://drive.switch.ch/index.php/s/Z8cKHAVyiDqkzaG/download",
+    "bytes": 13078583,
+    "sha256": "cc249982e8ac42c8c0e21f2a1233a621eada95cee14131aaa3adce99e2efc30b"
+  },
+  {
+    "file": "pems_bay.zip",
+    "url": "https://drive.switch.ch/index.php/s/5NPcgGFAIJ4oFcT/download",
+    "bytes": 25127972,
+    "sha256": "f59f810b3ed12e40514dbe30aeb916996415c442818992e0071baf7b51f84845"
+  }
+]

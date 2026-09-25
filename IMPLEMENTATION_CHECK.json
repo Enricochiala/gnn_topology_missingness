@@ -1,0 +1,9 @@
+{
+  "unchanged_retained_definitions": {
+    "models.py": 21,
+    "utils.py": 22,
+    "fisf.py": 3,
+    "temporal_imputation.py": 6
+  },
+  "comparison": "AST equality against original project implementation; only removed model definitions are excluded"
+}

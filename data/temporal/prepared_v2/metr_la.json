@@ -1,0 +1,41 @@
+{
+  "zero_policy": "zero speed treated as missing by official loader",
+  "directed": true,
+  "dataset": "metr_la",
+  "shape": [
+    34272,
+    207,
+    1
+  ],
+  "original_nonfinite_fraction": 0.0,
+  "benchmark_missing_fraction": 0.08109350825676487,
+  "zero_fraction": 0.08109350825676487,
+  "directed_edges": 1515,
+  "components": 2,
+  "details": [
+    24,
+    12
+  ],
+  "first_timestamp": "2012-03-01 00:00:00",
+  "last_timestamp": "2012-06-27 23:55:00",
+  "prepared_sha256": "b3e70379429bb4f9e62f59c6d5c7b72d0cfe4a62d1bf24156d85d6c5d4c093b3",
+  "split_bounds": [
+    [
+      0,
+      23990
+    ],
+    [
+      23990,
+      27417
+    ],
+    [
+      27417,
+      34272
+    ]
+  ],
+  "windows_stride_horizon": [
+    1997,
+    283,
+    569
+  ]
+}

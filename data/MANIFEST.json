@@ -1,0 +1,400 @@
+{
+  "files": [
+    {
+      "path": "data/tadpole.pt",
+      "bytes": 208989,
+      "sha256": "37809024851ed3e101324070ab71c7f3094c0e36303799696ad731726f018aa5",
+      "arrays": {
+        "x": {
+          "shape": [
+            555,
+            15
+          ]
+        },
+        "y": {
+          "shape": [
+            555
+          ]
+        },
+        "edge_index": {
+          "shape": [
+            2,
+            8325
+          ]
+        },
+        "pe": {
+          "shape": [
+            555,
+            8
+          ]
+        }
+      }
+    },
+    {
+      "path": "data/temporal/prepared_v2/aqi.npz",
+      "bytes": 4058906,
+      "sha256": "f6bf5192c7afef16128083f5e8ff5ddaff659dd62b95ecd79cb133556e79e4c3",
+      "arrays": {
+        "values": {
+          "shape": [
+            8760,
+            437,
+            1
+          ],
+          "dtype": "float32"
+        },
+        "observed": {
+          "shape": [
+            8760,
+            437,
+            1
+          ],
+          "dtype": "bool"
+        },
+        "timestamps": {
+          "shape": [
+            8760
+          ],
+          "dtype": "int64"
+        },
+        "edge_index": {
+          "shape": [
+            2,
+            5460
+          ],
+          "dtype": "int64"
+        },
+        "edge_weight": {
+          "shape": [
+            5460
+          ],
+          "dtype": "float32"
+        },
+        "channels": {
+          "shape": [
+            1
+          ],
+          "dtype": "<U4"
+        },
+        "node_ids": {
+          "shape": [
+            437
+          ],
+          "dtype": "<U6"
+        },
+        "pe": {
+          "shape": [
+            437,
+            16
+          ],
+          "dtype": "float32"
+        }
+      }
+    },
+    {
+      "path": "data/temporal/prepared_v2/engrad.npz",
+      "bytes": 64998585,
+      "sha256": "389865107504175d07ffeaa443580f9aa77783b051fa16a68fe6e8d2eace399a",
+      "arrays": {
+        "values": {
+          "shape": [
+            26304,
+            487,
+            5
+          ],
+          "dtype": "float32"
+        },
+        "observed": {
+          "shape": [
+            26304,
+            487,
+            5
+          ],
+          "dtype": "bool"
+        },
+        "timestamps": {
+          "shape": [
+            26304
+          ],
+          "dtype": "int64"
+        },
+        "edge_index": {
+          "shape": [
+            2,
+            4594
+          ],
+          "dtype": "int64"
+        },
+        "edge_weight": {
+          "shape": [
+            4594
+          ],
+          "dtype": "float32"
+        },
+        "channels": {
+          "shape": [
+            5
+          ],
+          "dtype": "<U20"
+        },
+        "node_ids": {
+          "shape": [
+            487
+          ],
+          "dtype": "<U36"
+        },
+        "pe": {
+          "shape": [
+            487,
+            16
+          ],
+          "dtype": "float32"
+        }
+      }
+    },
+    {
+      "path": "data/temporal/prepared_v2/graphmso.npz",
+      "bytes": 3740683,
+      "sha256": "1bf4c65f5678c0d6572e8edf48b29c7f99f39e96adda5c745fa24c1df7d3aace",
+      "arrays": {
+        "values": {
+          "shape": [
+            10000,
+            100,
+            1
+          ],
+          "dtype": "float32"
+        },
+        "observed": {
+          "shape": [
+            10000,
+            100,
+            1
+          ],
+          "dtype": "bool"
+        },
+        "timestamps": {
+          "shape": [
+            10000
+          ],
+          "dtype": "int64"
+        },
+        "edge_index": {
+          "shape": [
+            2,
+            300
+          ],
+          "dtype": "int64"
+        },
+        "edge_weight": {
+          "shape": [
+            300
+          ],
+          "dtype": "float32"
+        },
+        "channels": {
+          "shape": [
+            1
+          ],
+          "dtype": "<U6"
+        },
+        "node_ids": {
+          "shape": [
+            100
+          ],
+          "dtype": "<U2"
+        },
+        "pe": {
+          "shape": [
+            100,
+            16
+          ],
+          "dtype": "float32"
+        }
+      }
+    },
+    {
+      "path": "data/temporal/prepared_v2/metr_la.npz",
+      "bytes": 10629353,
+      "sha256": "b3e70379429bb4f9e62f59c6d5c7b72d0cfe4a62d1bf24156d85d6c5d4c093b3",
+      "arrays": {
+        "values": {
+          "shape": [
+            34272,
+            207,
+            1
+          ],
+          "dtype": "float32"
+        },
+        "observed": {
+          "shape": [
+            34272,
+            207,
+            1
+          ],
+          "dtype": "bool"
+        },
+        "timestamps": {
+          "shape": [
+            34272
+          ],
+          "dtype": "int64"
+        },
+        "edge_index": {
+          "shape": [
+            2,
+            1515
+          ],
+          "dtype": "int64"
+        },
+        "edge_weight": {
+          "shape": [
+            1515
+          ],
+          "dtype": "float32"
+        },
+        "channels": {
+          "shape": [
+            1
+          ],
+          "dtype": "<U9"
+        },
+        "node_ids": {
+          "shape": [
+            207
+          ],
+          "dtype": "<U6"
+        },
+        "pe": {
+          "shape": [
+            207,
+            16
+          ],
+          "dtype": "float32"
+        }
+      }
+    },
+    {
+      "path": "data/temporal/prepared_v2/pems_bay.npz",
+      "bytes": 19612775,
+      "sha256": "e55b5c4e6498625cd8d3cf272393541cf7ae2d66755fba0704ced6ff440585e6",
+      "arrays": {
+        "values": {
+          "shape": [
+            52128,
+            325,
+            1
+          ],
+          "dtype": "float32"
+        },
+        "observed": {
+          "shape": [
+            52128,
+            325,
+            1
+          ],
+          "dtype": "bool"
+        },
+        "timestamps": {
+          "shape": [
+            52128
+          ],
+          "dtype": "int64"
+        },
+        "edge_index": {
+          "shape": [
+            2,
+            2369
+          ],
+          "dtype": "int64"
+        },
+        "edge_weight": {
+          "shape": [
+            2369
+          ],
+          "dtype": "float32"
+        },
+        "channels": {
+          "shape": [
+            1
+          ],
+          "dtype": "<U9"
+        },
+        "node_ids": {
+          "shape": [
+            325
+          ],
+          "dtype": "<U6"
+        },
+        "pe": {
+          "shape": [
+            325,
+            16
+          ],
+          "dtype": "float32"
+        }
+      }
+    },
+    {
+      "path": "data/temporal/prepared_v2/pv_us.npz",
+      "bytes": 34206800,
+      "sha256": "76929c6727b67084b4d1bc9869fd7c3d5fc73ee26d0b5acca77c8d7a4d5ff8db",
+      "arrays": {
+        "values": {
+          "shape": [
+            26283,
+            1081,
+            1
+          ],
+          "dtype": "float32"
+        },
+        "observed": {
+          "shape": [
+            26283,
+            1081,
+            1
+          ],
+          "dtype": "bool"
+        },
+        "timestamps": {
+          "shape": [
+            26283
+          ],
+          "dtype": "int64"
+        },
+        "edge_index": {
+          "shape": [
+            2,
+            10562
+          ],
+          "dtype": "int64"
+        },
+        "edge_weight": {
+          "shape": [
+            10562
+          ],
+          "dtype": "float32"
+        },
+        "channels": {
+          "shape": [
+            1
+          ],
+          "dtype": "<U8"
+        },
+        "node_ids": {
+          "shape": [
+            1081
+          ],
+          "dtype": "<U5"
+        },
+        "pe": {
+          "shape": [
+            1081,
+            16
+          ],
+          "dtype": "float32"
+        }
+      }
+    }
+  ]
+}

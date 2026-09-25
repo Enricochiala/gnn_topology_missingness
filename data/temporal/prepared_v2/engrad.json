@@ -1,0 +1,42 @@
+{
+  "precipitation_unit": "cm",
+  "zero_radiation_is_observed": true,
+  "added_edges": [],
+  "dataset": "engrad",
+  "shape": [
+    26304,
+    487,
+    5
+  ],
+  "original_nonfinite_fraction": 0.0,
+  "benchmark_missing_fraction": 0.0,
+  "zero_fraction": 0.2665428888322667,
+  "directed_edges": 4594,
+  "components": 1,
+  "details": [
+    24,
+    6
+  ],
+  "first_timestamp": "2018-01-01 00:00:00",
+  "last_timestamp": "2020-12-31 23:00:00",
+  "prepared_sha256": "389865107504175d07ffeaa443580f9aa77783b051fa16a68fe6e8d2eace399a",
+  "split_bounds": [
+    [
+      0,
+      15312
+    ],
+    [
+      15312,
+      17520
+    ],
+    [
+      17520,
+      26304
+    ]
+  ],
+  "windows_stride_horizon": [
+    2548,
+    364,
+    1460
+  ]
+}

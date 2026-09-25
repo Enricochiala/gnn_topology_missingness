@@ -1,0 +1,80 @@
+{
+  "added_edges": [
+    [
+      1056,
+      1067
+    ],
+    [
+      654,
+      631
+    ],
+    [
+      631,
+      654
+    ],
+    [
+      1001,
+      1025
+    ],
+    [
+      820,
+      813
+    ],
+    [
+      912,
+      920
+    ],
+    [
+      1067,
+      1056
+    ],
+    [
+      865,
+      615
+    ],
+    [
+      615,
+      865
+    ]
+  ],
+  "excluded_broken_node": "04315",
+  "zero_policy": "original benchmark excludes nighttime zeros; not sensor missingness",
+  "timezone": "Etc/GMT+7",
+  "dataset": "pv_us",
+  "shape": [
+    26283,
+    1081,
+    1
+  ],
+  "original_nonfinite_fraction": 0.0001141422212076247,
+  "benchmark_missing_fraction": 0.5402061310668764,
+  "zero_fraction": 0.5400919888456688,
+  "directed_edges": 10562,
+  "components": 1,
+  "details": [
+    72,
+    6
+  ],
+  "first_timestamp": "2006-01-01 07:00:00",
+  "last_timestamp": "2007-01-01 07:40:00",
+  "prepared_sha256": "76929c6727b67084b4d1bc9869fd7c3d5fc73ee26d0b5acca77c8d7a4d5ff8db",
+  "split_bounds": [
+    [
+      0,
+      18398
+    ],
+    [
+      18398,
+      21026
+    ],
+    [
+      21026,
+      26283
+    ]
+  ],
+  "windows_stride_horizon": [
+    3054,
+    426,
+    864
+  ]
+}

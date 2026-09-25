@@ -1,0 +1,386 @@
+[
+  {
+    "hidden": 16,
+    "dropout": 0.5,
+    "lr": 0.01,
+    "k": 2,
+    "q": 4,
+    "likelihood": "gaussian"
+  },
+  {
+    "hidden": 16,
+    "dropout": 0.5,
+    "lr": 0.01,
+    "k": 2,
+    "q": 8,
+    "likelihood": "gaussian"
+  },
+  {
+    "hidden": 16,
+    "dropout": 0.5,
+    "lr": 0.01,
+    "k": 2,
+    "q": 16,
+    "likelihood": "gaussian"
+  },
+  {
+    "hidden": 16,
+    "dropout": 0.5,
+    "lr": 0.01,
+    "k": 3,
+    "q": 4,
+    "likelihood": "gaussian"
+  },
+  {
+    "hidden": 16,
+    "dropout": 0.5,
+    "lr": 0.01,
+    "k": 3,
+    "q": 8,
+    "likelihood": "gaussian"
+  },
+  {
+    "hidden": 16,
+    "dropout": 0.5,
+    "lr": 0.01,
+    "k": 3,
+    "q": 16,
+    "likelihood": "gaussian"
+  },
+  {
+    "hidden": 16,
+    "dropout": 0.5,
+    "lr": 0.01,
+    "k": 5,
+    "q": 4,
+    "likelihood": "gaussian"
+  },
+  {
+    "hidden": 16,
+    "dropout": 0.5,
+    "lr": 0.01,
+    "k": 5,
+    "q": 8,
+    "likelihood": "gaussian"
+  },
+  {
+    "hidden": 16,
+    "dropout": 0.5,
+    "lr": 0.01,
+    "k": 5,
+    "q": 16,
+    "likelihood": "gaussian"
+  },
+  {
+    "hidden": 16,
+    "dropout": 0.5,
+    "lr": 0.001,
+    "k": 5,
+    "q": 8,
+    "likelihood": "legacy"
+  },
+  {
+    "hidden": 16,
+    "dropout": 0.5,
+    "lr": 0.003,
+    "k": 5,
+    "q": 8,
+    "likelihood": "legacy"
+  },
+  {
+    "hidden": 16,
+    "dropout": 0.5,
+    "lr": 0.01,
+    "k": 5,
+    "q": 8,
+    "likelihood": "legacy"
+  },
+  {
+    "hidden": 16,
+    "dropout": 0.0,
+    "lr": 0.001,
+    "k": 5,
+    "q": 8,
+    "likelihood": "gaussian"
+  },
+  {
+    "hidden": 16,
+    "dropout": 0.1,
+    "lr": 0.001,
+    "k": 5,
+    "q": 8,
+    "likelihood": "gaussian"
+  },
+  {
+    "hidden": 16,
+    "dropout": 0.0,
+    "lr": 0.003,
+    "k": 5,
+    "q": 8,
+    "likelihood": "gaussian"
+  },
+  {
+    "hidden": 16,
+    "dropout": 0.1,
+    "lr": 0.003,
+    "k": 5,
+    "q": 8,
+    "likelihood": "gaussian"
+  },
+  {
+    "hidden": 32,
+    "dropout": 0.0,
+    "lr": 0.001,
+    "k": 5,
+    "q": 8,
+    "likelihood": "gaussian"
+  },
+  {
+    "hidden": 32,
+    "dropout": 0.1,
+    "lr": 0.001,
+    "k": 5,
+    "q": 8,
+    "likelihood": "gaussian"
+  },
+  {
+    "hidden": 32,
+    "dropout": 0.0,
+    "lr": 0.003,
+    "k": 5,
+    "q": 8,
+    "likelihood": "gaussian"
+  },
+  {
+    "hidden": 32,
+    "dropout": 0.1,
+    "lr": 0.003,
+    "k": 5,
+    "q": 8,
+    "likelihood": "gaussian"
+  },
+  {
+    "hidden": 64,
+    "dropout": 0.0,
+    "lr": 0.001,
+    "k": 5,
+    "q": 8,
+    "likelihood": "gaussian"
+  },
+  {
+    "hidden": 64,
+    "dropout": 0.1,
+    "lr": 0.001,
+    "k": 5,
+    "q": 8,
+    "likelihood": "gaussian"
+  },
+  {
+    "hidden": 64,
+    "dropout": 0.0,
+    "lr": 0.003,
+    "k": 5,
+    "q": 8,
+    "likelihood": "gaussian"
+  },
+  {
+    "hidden": 64,
+    "dropout": 0.1,
+    "lr": 0.003,
+    "k": 5,
+    "q": 8,
+    "likelihood": "gaussian"
+  },
+  {
+    "hidden": 64,
+    "dropout": 0.1,
+    "lr": 0.003,
+    "k": 8,
+    "q": 16,
+    "likelihood": "gaussian"
+  },
+  {
+    "hidden": 32,
+    "dropout": 0.3,
+    "lr": 0.0003,
+    "k": 5,
+    "q": 16,
+    "likelihood": "gaussian"
+  },
+  {
+    "hidden": 32,
+    "dropout": 0.5,
+    "lr": 0.003,
+    "k": 8,
+    "q": 8,
+    "likelihood": "gaussian"
+  },
+  {
+    "hidden": 64,
+    "dropout": 0.0,
+    "lr": 0.001,
+    "k": 8,
+    "q": 16,
+    "likelihood": "gaussian"
+  },
+  {
+    "hidden": 16,
+    "dropout": 0.5,
+    "lr": 0.003,
+    "k": 2,
+    "q": 16,
+    "likelihood": "gaussian"
+  },
+  {
+    "hidden": 32,
+    "dropout": 0.5,
+    "lr": 0.01,
+    "k": 3,
+    "q": 4,
+    "likelihood": "gaussian"
+  },
+  {
+    "hidden": 32,
+    "dropout": 0.1,
+    "lr": 0.01,
+    "k": 2,
+    "q": 8,
+    "likelihood": "gaussian"
+  },
+  {
+    "hidden": 16,
+    "dropout": 0.5,
+    "lr": 0.0003,
+    "k": 5,
+    "q": 8,
+    "likelihood": "gaussian"
+  },
+  {
+    "hidden": 16,
+    "dropout": 0.5,
+    "lr": 0.001,
+    "k": 8,
+    "q": 16,
+    "likelihood": "gaussian"
+  },
+  {
+    "hidden": 16,
+    "dropout": 0.3,
+    "lr": 0.001,
+    "k": 2,
+    "q": 16,
+    "likelihood": "gaussian"
+  },
+  {
+    "hidden": 64,
+    "dropout": 0.1,
+    "lr": 0.0003,
+    "k": 2,
+    "q": 16,
+    "likelihood": "gaussian"
+  },
+  {
+    "hidden": 64,
+    "dropout": 0.5,
+    "lr": 0.003,
+    "k": 8,
+    "q": 4,
+    "likelihood": "gaussian"
+  },
+  {
+    "hidden": 32,
+    "dropout": 0.0,
+    "lr": 0.01,
+    "k": 8,
+    "q": 16,
+    "likelihood": "gaussian"
+  },
+  {
+    "hidden": 32,
+    "dropout": 0.0,
+    "lr": 0.01,
+    "k": 8,
+    "q": 4,
+    "likelihood": "gaussian"
+  },
+  {
+    "hidden": 32,
+    "dropout": 0.3,
+    "lr": 0.001,
+    "k": 8,
+    "q": 16,
+    "likelihood": "gaussian"
+  },
+  {
+    "hidden": 64,
+    "dropout": 0.1,
+    "lr": 0.003,
+    "k": 8,
+    "q": 8,
+    "likelihood": "gaussian"
+  },
+  {
+    "hidden": 32,
+    "dropout": 0.1,
+    "lr": 0.001,
+    "k": 3,
+    "q": 4,
+    "likelihood": "gaussian"
+  },
+  {
+    "hidden": 64,
+    "dropout": 0.3,
+    "lr": 0.001,
+    "k": 3,
+    "q": 16,
+    "likelihood": "gaussian"
+  },
+  {
+    "hidden": 32,
+    "dropout": 0.1,
+    "lr": 0.003,
+    "k": 5,
+    "q": 16,
+    "likelihood": "gaussian"
+  },
+  {
+    "hidden": 32,
+    "dropout": 0.5,
+    "lr": 0.0003,
+    "k": 2,
+    "q": 16,
+    "likelihood": "gaussian"
+  },
+  {
+    "hidden": 32,
+    "dropout": 0.3,
+    "lr": 0.0003,
+    "k": 2,
+    "q": 16,
+    "likelihood": "gaussian"
+  },
+  {
+    "hidden": 16,
+    "dropout": 0.0,
+    "lr": 0.003,
+    "k": 5,
+    "q": 16,
+    "likelihood": "gaussian"
+  },
+  {
+    "hidden": 16,
+    "dropout": 0.0,
+    "lr": 0.0003,
+    "k": 5,
+    "q": 4,
+    "likelihood": "gaussian"
+  },
+  {
+    "hidden": 32,
+    "dropout": 0.1,
+    "lr": 0.0003,
+    "k": 2,
+    "q": 16,
+    "likelihood": "gaussian"
+  }
+]

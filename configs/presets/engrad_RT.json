@@ -1,0 +1,1199 @@
+{
+  "dataset": "engrad",
+  "mechanism": "RT",
+  "selection_criterion": "minimum validation MAE separately per rate",
+  "search_budget": "48 PEMix candidates per rate, 12 for other models",
+  "input_hashes": {
+    "engrad": "389865107504175d07ffeaa443580f9aa77783b051fa16a68fe6e8d2eace399a"
+  },
+  "selection": {
+    "engrad/RT/0.0/gnnzero": {
+      "config": {
+        "hidden": 128,
+        "dropout": 0.5,
+        "lr": 0.001,
+        "k": 5,
+        "q": 8,
+        "likelihood": "not_applicable"
+      },
+      "validation_mae": 2.712804331133948,
+      "candidate": 3
+    },
+    "engrad/RT/0.0/gnnmi": {
+      "config": {
+        "hidden": 128,
+        "dropout": 0.5,
+        "lr": 0.001,
+        "k": 5,
+        "q": 8,
+        "likelihood": "not_applicable"
+      },
+      "validation_mae": 2.717359628534919,
+      "candidate": 3
+    },
+    "engrad/RT/0.0/gnnmedian": {
+      "config": {
+        "hidden": 128,
+        "dropout": 0.5,
+        "lr": 0.001,
+        "k": 5,
+        "q": 8,
+        "likelihood": "not_applicable"
+      },
+      "validation_mae": 2.7132556511710115,
+      "candidate": 3
+    },
+    "engrad/RT/0.0/gnnmim": {
+      "config": {
+        "hidden": 128,
+        "dropout": 0.1,
+        "lr": 0.001,
+        "k": 5,
+        "q": 8,
+        "likelihood": "not_applicable"
+      },
+      "validation_mae": 2.7112622969934934,
+      "candidate": 1
+    },
+    "engrad/RT/0.0/fp": {
+      "config": {
+        "hidden": 64,
+        "dropout": 0.1,
+        "lr": 0.001,
+        "k": 5,
+        "q": 8,
+        "likelihood": "not_applicable"
+      },
+      "validation_mae": 2.7062142847719484,
+      "candidate": 1
+    },
+    "engrad/RT/0.0/pcfi": {
+      "config": {
+        "hidden": 64,
+        "dropout": 0.3,
+        "lr": 0.001,
+        "k": 5,
+        "q": 8,
+        "likelihood": "not_applicable"
+      },
+      "validation_mae": 2.7075998017819356,
+      "candidate": 2
+    },
+    "engrad/RT/0.0/fisf": {
+      "config": {
+        "hidden": 64,
+        "dropout": 0.1,
+        "lr": 0.001,
+        "k": 5,
+        "q": 8,
+        "likelihood": "not_applicable"
+      },
+      "validation_mae": 2.7125926970862144,
+      "candidate": 1
+    },
+    "engrad/RT/0.0/gcnmf": {
+      "config": {
+        "hidden": 16,
+        "dropout": 0.0,
+        "lr": 0.003,
+        "k": 5,
+        "q": 8,
+        "likelihood": "legacy"
+      },
+      "validation_mae": 2.8075565370777644,
+      "candidate": 2
+    },
+    "engrad/RT/0.0/gcnmf_pe": {
+      "config": {
+        "hidden": 64,
+        "dropout": 0.1,
+        "lr": 0.0003,
+        "k": 2,
+        "q": 16,
+        "likelihood": "gaussian"
+      },
+      "validation_mae": 2.6983581264340875,
+      "candidate": 34
+    },
+    "engrad/RT/0.1/gnnzero": {
+      "config": {
+        "hidden": 128,
+        "dropout": 0.5,
+        "lr": 0.001,
+        "k": 5,
+        "q": 8,
+        "likelihood": "not_applicable"
+      },
+      "validation_mae": 2.9344047484666,
+      "candidate": 3
+    },
+    "engrad/RT/0.1/gnnmi": {
+      "config": {
+        "hidden": 128,
+        "dropout": 0.1,
+        "lr": 0.001,
+        "k": 5,
+        "q": 8,
+        "likelihood": "not_applicable"
+      },
+      "validation_mae": 2.932008245912493,
+      "candidate": 1
+    },
+    "engrad/RT/0.1/gnnmedian": {
+      "config": {
+        "hidden": 128,
+        "dropout": 0.1,
+        "lr": 0.001,
+        "k": 5,
+        "q": 8,
+        "likelihood": "not_applicable"
+      },
+      "validation_mae": 2.928922056284474,
+      "candidate": 1
+    },
+    "engrad/RT/0.1/gnnmim": {
+      "config": {
+        "hidden": 128,
+        "dropout": 0.5,
+        "lr": 0.001,
+        "k": 5,
+        "q": 8,
+        "likelihood": "not_applicable"
+      },
+      "validation_mae": 3.09518706548533,
+      "candidate": 3
+    },
+    "engrad/RT/0.1/fp": {
+      "config": {
+        "hidden": 64,
+        "dropout": 0.1,
+        "lr": 0.001,
+        "k": 5,
+        "q": 8,
+        "likelihood": "not_applicable"
+      },
+      "validation_mae": 2.727133412582091,
+      "candidate": 1
+    },
+    "engrad/RT/0.1/pcfi": {
+      "config": {
+        "hidden": 64,
+        "dropout": 0.1,
+        "lr": 0.001,
+        "k": 5,
+        "q": 8,
+        "likelihood": "not_applicable"
+      },
+      "validation_mae": 2.9964025216121306,
+      "candidate": 1
+    },
+    "engrad/RT/0.1/fisf": {
+      "config": {
+        "hidden": 64,
+        "dropout": 0.1,
+        "lr": 0.001,
+        "k": 5,
+        "q": 8,
+        "likelihood": "not_applicable"
+      },
+      "validation_mae": 2.7944307508811126,
+      "candidate": 1
+    },
+    "engrad/RT/0.1/gcnmf": {
+      "config": {
+        "hidden": 16,
+        "dropout": 0.0,
+        "lr": 0.001,
+        "k": 5,
+        "q": 8,
+        "likelihood": "gaussian"
+      },
+      "validation_mae": 2.997435840938012,
+      "candidate": 6
+    },
+    "engrad/RT/0.1/gcnmf_pe": {
+      "config": {
+        "hidden": 64,
+        "dropout": 0.1,
+        "lr": 0.001,
+        "k": 5,
+        "q": 8,
+        "likelihood": "gaussian"
+      },
+      "validation_mae": 2.8831193937513233,
+      "candidate": 21
+    },
+    "engrad/RT/0.2/gnnzero": {
+      "config": {
+        "hidden": 128,
+        "dropout": 0.5,
+        "lr": 0.001,
+        "k": 5,
+        "q": 8,
+        "likelihood": "not_applicable"
+      },
+      "validation_mae": 3.126223222379941,
+      "candidate": 3
+    },
+    "engrad/RT/0.2/gnnmi": {
+      "config": {
+        "hidden": 128,
+        "dropout": 0.5,
+        "lr": 0.001,
+        "k": 5,
+        "q": 8,
+        "likelihood": "not_applicable"
+      },
+      "validation_mae": 3.1309575796003246,
+      "candidate": 3
+    },
+    "engrad/RT/0.2/gnnmedian": {
+      "config": {
+        "hidden": 128,
+        "dropout": 0.5,
+        "lr": 0.001,
+        "k": 5,
+        "q": 8,
+        "likelihood": "not_applicable"
+      },
+      "validation_mae": 3.0963775854136864,
+      "candidate": 3
+    },
+    "engrad/RT/0.2/gnnmim": {
+      "config": {
+        "hidden": 128,
+        "dropout": 0.5,
+        "lr": 0.001,
+        "k": 5,
+        "q": 8,
+        "likelihood": "not_applicable"
+      },
+      "validation_mae": 3.3170568042773243,
+      "candidate": 3
+    },
+    "engrad/RT/0.2/fp": {
+      "config": {
+        "hidden": 64,
+        "dropout": 0.1,
+        "lr": 0.001,
+        "k": 5,
+        "q": 8,
+        "likelihood": "not_applicable"
+      },
+      "validation_mae": 2.824063149513447,
+      "candidate": 1
+    },
+    "engrad/RT/0.2/pcfi": {
+      "config": {
+        "hidden": 64,
+        "dropout": 0.1,
+        "lr": 0.001,
+        "k": 5,
+        "q": 8,
+        "likelihood": "not_applicable"
+      },
+      "validation_mae": 3.476638637885353,
+      "candidate": 1
+    },
+    "engrad/RT/0.2/fisf": {
+      "config": {
+        "hidden": 64,
+        "dropout": 0.1,
+        "lr": 0.001,
+        "k": 5,
+        "q": 8,
+        "likelihood": "not_applicable"
+      },
+      "validation_mae": 2.8948515468906484,
+      "candidate": 1
+    },
+    "engrad/RT/0.2/gcnmf": {
+      "config": {
+        "hidden": 16,
+        "dropout": 0.0,
+        "lr": 0.003,
+        "k": 5,
+        "q": 8,
+        "likelihood": "legacy"
+      },
+      "validation_mae": 3.120576911663309,
+      "candidate": 2
+    },
+    "engrad/RT/0.2/gcnmf_pe": {
+      "config": {
+        "hidden": 64,
+        "dropout": 0.1,
+        "lr": 0.001,
+        "k": 5,
+        "q": 8,
+        "likelihood": "gaussian"
+      },
+      "validation_mae": 3.096296846638525,
+      "candidate": 21
+    },
+    "engrad/RT/0.3/gnnzero": {
+      "config": {
+        "hidden": 128,
+        "dropout": 0.5,
+        "lr": 0.001,
+        "k": 5,
+        "q": 8,
+        "likelihood": "not_applicable"
+      },
+      "validation_mae": 3.256450418701992,
+      "candidate": 3
+    },
+    "engrad/RT/0.3/gnnmi": {
+      "config": {
+        "hidden": 128,
+        "dropout": 0.5,
+        "lr": 0.001,
+        "k": 5,
+        "q": 8,
+        "likelihood": "not_applicable"
+      },
+      "validation_mae": 3.2515270272109866,
+      "candidate": 3
+    },
+    "engrad/RT/0.3/gnnmedian": {
+      "config": {
+        "hidden": 128,
+        "dropout": 0.5,
+        "lr": 0.001,
+        "k": 5,
+        "q": 8,
+        "likelihood": "not_applicable"
+      },
+      "validation_mae": 3.228079188542058,
+      "candidate": 3
+    },
+    "engrad/RT/0.3/gnnmim": {
+      "config": {
+        "hidden": 128,
+        "dropout": 0.5,
+        "lr": 0.001,
+        "k": 5,
+        "q": 8,
+        "likelihood": "not_applicable"
+      },
+      "validation_mae": 3.5178197977491785,
+      "candidate": 3
+    },
+    "engrad/RT/0.3/fp": {
+      "config": {
+        "hidden": 64,
+        "dropout": 0.1,
+        "lr": 0.001,
+        "k": 5,
+        "q": 8,
+        "likelihood": "not_applicable"
+      },
+      "validation_mae": 2.9802367574246587,
+      "candidate": 1
+    },
+    "engrad/RT/0.3/pcfi": {
+      "config": {
+        "hidden": 64,
+        "dropout": 0.3,
+        "lr": 0.001,
+        "k": 5,
+        "q": 8,
+        "likelihood": "not_applicable"
+      },
+      "validation_mae": 3.8785068824039612,
+      "candidate": 2
+    },
+    "engrad/RT/0.3/fisf": {
+      "config": {
+        "hidden": 64,
+        "dropout": 0.0,
+        "lr": 0.001,
+        "k": 5,
+        "q": 8,
+        "likelihood": "not_applicable"
+      },
+      "validation_mae": 3.0200748163863356,
+      "candidate": 0
+    },
+    "engrad/RT/0.3/gcnmf": {
+      "config": {
+        "hidden": 16,
+        "dropout": 0.0,
+        "lr": 0.003,
+        "k": 5,
+        "q": 8,
+        "likelihood": "legacy"
+      },
+      "validation_mae": 3.264376802724425,
+      "candidate": 2
+    },
+    "engrad/RT/0.3/gcnmf_pe": {
+      "config": {
+        "hidden": 16,
+        "dropout": 0.0,
+        "lr": 0.003,
+        "k": 5,
+        "q": 8,
+        "likelihood": "gaussian"
+      },
+      "validation_mae": 3.193586909871703,
+      "candidate": 14
+    },
+    "engrad/RT/0.4/gnnzero": {
+      "config": {
+        "hidden": 128,
+        "dropout": 0.5,
+        "lr": 0.001,
+        "k": 5,
+        "q": 8,
+        "likelihood": "not_applicable"
+      },
+      "validation_mae": 3.4225131526982793,
+      "candidate": 3
+    },
+    "engrad/RT/0.4/gnnmi": {
+      "config": {
+        "hidden": 128,
+        "dropout": 0.5,
+        "lr": 0.001,
+        "k": 5,
+        "q": 8,
+        "likelihood": "not_applicable"
+      },
+      "validation_mae": 3.4180898940779025,
+      "candidate": 3
+    },
+    "engrad/RT/0.4/gnnmedian": {
+      "config": {
+        "hidden": 128,
+        "dropout": 0.5,
+        "lr": 0.001,
+        "k": 5,
+        "q": 8,
+        "likelihood": "not_applicable"
+      },
+      "validation_mae": 3.36064892498381,
+      "candidate": 3
+    },
+    "engrad/RT/0.4/gnnmim": {
+      "config": {
+        "hidden": 128,
+        "dropout": 0.3,
+        "lr": 0.003,
+        "k": 5,
+        "q": 8,
+        "likelihood": "not_applicable"
+      },
+      "validation_mae": 3.6761450623876133,
+      "candidate": 6
+    },
+    "engrad/RT/0.4/fp": {
+      "config": {
+        "hidden": 64,
+        "dropout": 0.3,
+        "lr": 0.001,
+        "k": 5,
+        "q": 8,
+        "likelihood": "not_applicable"
+      },
+      "validation_mae": 3.086570197505894,
+      "candidate": 2
+    },
+    "engrad/RT/0.4/pcfi": {
+      "config": {
+        "hidden": 64,
+        "dropout": 0.3,
+        "lr": 0.001,
+        "k": 5,
+        "q": 8,
+        "likelihood": "not_applicable"
+      },
+      "validation_mae": 4.1760427274289,
+      "candidate": 2
+    },
+    "engrad/RT/0.4/fisf": {
+      "config": {
+        "hidden": 64,
+        "dropout": 0.1,
+        "lr": 0.001,
+        "k": 5,
+        "q": 8,
+        "likelihood": "not_applicable"
+      },
+      "validation_mae": 3.152279664391166,
+      "candidate": 1
+    },
+    "engrad/RT/0.4/gcnmf": {
+      "config": {
+        "hidden": 16,
+        "dropout": 0.0,
+        "lr": 0.003,
+        "k": 5,
+        "q": 8,
+        "likelihood": "legacy"
+      },
+      "validation_mae": 3.4018604115074336,
+      "candidate": 2
+    },
+    "engrad/RT/0.4/gcnmf_pe": {
+      "config": {
+        "hidden": 32,
+        "dropout": 0.3,
+        "lr": 0.001,
+        "k": 8,
+        "q": 16,
+        "likelihood": "gaussian"
+      },
+      "validation_mae": 3.328514026089724,
+      "candidate": 38
+    },
+    "engrad/RT/0.5/gnnzero": {
+      "config": {
+        "hidden": 128,
+        "dropout": 0.5,
+        "lr": 0.001,
+        "k": 5,
+        "q": 8,
+        "likelihood": "not_applicable"
+      },
+      "validation_mae": 3.5492201365723437,
+      "candidate": 3
+    },
+    "engrad/RT/0.5/gnnmi": {
+      "config": {
+        "hidden": 128,
+        "dropout": 0.5,
+        "lr": 0.001,
+        "k": 5,
+        "q": 8,
+        "likelihood": "not_applicable"
+      },
+      "validation_mae": 3.5526361650144955,
+      "candidate": 3
+    },
+    "engrad/RT/0.5/gnnmedian": {
+      "config": {
+        "hidden": 128,
+        "dropout": 0.5,
+        "lr": 0.001,
+        "k": 5,
+        "q": 8,
+        "likelihood": "not_applicable"
+      },
+      "validation_mae": 3.484104161908831,
+      "candidate": 3
+    },
+    "engrad/RT/0.5/gnnmim": {
+      "config": {
+        "hidden": 128,
+        "dropout": 0.5,
+        "lr": 0.003,
+        "k": 5,
+        "q": 8,
+        "likelihood": "not_applicable"
+      },
+      "validation_mae": 3.753182964970452,
+      "candidate": 7
+    },
+    "engrad/RT/0.5/fp": {
+      "config": {
+        "hidden": 64,
+        "dropout": 0.3,
+        "lr": 0.003,
+        "k": 5,
+        "q": 8,
+        "likelihood": "not_applicable"
+      },
+      "validation_mae": 3.215690938353197,
+      "candidate": 6
+    },
+    "engrad/RT/0.5/pcfi": {
+      "config": {
+        "hidden": 64,
+        "dropout": 0.5,
+        "lr": 0.003,
+        "k": 5,
+        "q": 8,
+        "likelihood": "not_applicable"
+      },
+      "validation_mae": 4.513101583365058,
+      "candidate": 7
+    },
+    "engrad/RT/0.5/fisf": {
+      "config": {
+        "hidden": 64,
+        "dropout": 0.3,
+        "lr": 0.001,
+        "k": 5,
+        "q": 8,
+        "likelihood": "not_applicable"
+      },
+      "validation_mae": 3.2042727875002623,
+      "candidate": 2
+    },
+    "engrad/RT/0.5/gcnmf": {
+      "config": {
+        "hidden": 16,
+        "dropout": 0.5,
+        "lr": 0.001,
+        "k": 5,
+        "q": 8,
+        "likelihood": "legacy"
+      },
+      "validation_mae": 3.5507564298510834,
+      "candidate": 1
+    },
+    "engrad/RT/0.5/gcnmf_pe": {
+      "config": {
+        "hidden": 64,
+        "dropout": 0.3,
+        "lr": 0.001,
+        "k": 3,
+        "q": 16,
+        "likelihood": "gaussian"
+      },
+      "validation_mae": 3.464797048339923,
+      "candidate": 41
+    },
+    "engrad/RT/0.6/gnnzero": {
+      "config": {
+        "hidden": 128,
+        "dropout": 0.5,
+        "lr": 0.001,
+        "k": 5,
+        "q": 8,
+        "likelihood": "not_applicable"
+      },
+      "validation_mae": 3.7090644986123995,
+      "candidate": 3
+    },
+    "engrad/RT/0.6/gnnmi": {
+      "config": {
+        "hidden": 128,
+        "dropout": 0.5,
+        "lr": 0.001,
+        "k": 5,
+        "q": 8,
+        "likelihood": "not_applicable"
+      },
+      "validation_mae": 3.733339031967089,
+      "candidate": 3
+    },
+    "engrad/RT/0.6/gnnmedian": {
+      "config": {
+        "hidden": 128,
+        "dropout": 0.5,
+        "lr": 0.001,
+        "k": 5,
+        "q": 8,
+        "likelihood": "not_applicable"
+      },
+      "validation_mae": 3.6647618095734047,
+      "candidate": 3
+    },
+    "engrad/RT/0.6/gnnmim": {
+      "config": {
+        "hidden": 128,
+        "dropout": 0.5,
+        "lr": 0.001,
+        "k": 5,
+        "q": 8,
+        "likelihood": "not_applicable"
+      },
+      "validation_mae": 3.91037849739322,
+      "candidate": 3
+    },
+    "engrad/RT/0.6/fp": {
+      "config": {
+        "hidden": 64,
+        "dropout": 0.5,
+        "lr": 0.001,
+        "k": 5,
+        "q": 8,
+        "likelihood": "not_applicable"
+      },
+      "validation_mae": 3.322887067991431,
+      "candidate": 3
+    },
+    "engrad/RT/0.6/pcfi": {
+      "config": {
+        "hidden": 64,
+        "dropout": 0.5,
+        "lr": 0.003,
+        "k": 5,
+        "q": 8,
+        "likelihood": "not_applicable"
+      },
+      "validation_mae": 4.852010665877247,
+      "candidate": 7
+    },
+    "engrad/RT/0.6/fisf": {
+      "config": {
+        "hidden": 64,
+        "dropout": 0.5,
+        "lr": 0.001,
+        "k": 5,
+        "q": 8,
+        "likelihood": "not_applicable"
+      },
+      "validation_mae": 3.341184930549355,
+      "candidate": 3
+    },
+    "engrad/RT/0.6/gcnmf": {
+      "config": {
+        "hidden": 16,
+        "dropout": 0.0,
+        "lr": 0.003,
+        "k": 5,
+        "q": 8,
+        "likelihood": "gaussian"
+      },
+      "validation_mae": 3.6617242650306387,
+      "candidate": 8
+    },
+    "engrad/RT/0.6/gcnmf_pe": {
+      "config": {
+        "hidden": 64,
+        "dropout": 0.3,
+        "lr": 0.001,
+        "k": 3,
+        "q": 16,
+        "likelihood": "gaussian"
+      },
+      "validation_mae": 3.6505307708787633,
+      "candidate": 41
+    },
+    "engrad/RT/0.7/gnnzero": {
+      "config": {
+        "hidden": 128,
+        "dropout": 0.5,
+        "lr": 0.001,
+        "k": 5,
+        "q": 8,
+        "likelihood": "not_applicable"
+      },
+      "validation_mae": 3.802373456400832,
+      "candidate": 3
+    },
+    "engrad/RT/0.7/gnnmi": {
+      "config": {
+        "hidden": 128,
+        "dropout": 0.5,
+        "lr": 0.001,
+        "k": 5,
+        "q": 8,
+        "likelihood": "not_applicable"
+      },
+      "validation_mae": 3.8176068949018043,
+      "candidate": 3
+    },
+    "engrad/RT/0.7/gnnmedian": {
+      "config": {
+        "hidden": 128,
+        "dropout": 0.5,
+        "lr": 0.001,
+        "k": 5,
+        "q": 8,
+        "likelihood": "not_applicable"
+      },
+      "validation_mae": 3.7691333988596214,
+      "candidate": 3
+    },
+    "engrad/RT/0.7/gnnmim": {
+      "config": {
+        "hidden": 128,
+        "dropout": 0.5,
+        "lr": 0.003,
+        "k": 5,
+        "q": 8,
+        "likelihood": "not_applicable"
+      },
+      "validation_mae": 4.002976743243894,
+      "candidate": 7
+    },
+    "engrad/RT/0.7/fp": {
+      "config": {
+        "hidden": 64,
+        "dropout": 0.5,
+        "lr": 0.001,
+        "k": 5,
+        "q": 8,
+        "likelihood": "not_applicable"
+      },
+      "validation_mae": 3.3854289660317773,
+      "candidate": 3
+    },
+    "engrad/RT/0.7/pcfi": {
+      "config": {
+        "hidden": 64,
+        "dropout": 0.5,
+        "lr": 0.01,
+        "k": 5,
+        "q": 8,
+        "likelihood": "not_applicable"
+      },
+      "validation_mae": 4.8741777368576535,
+      "candidate": 11
+    },
+    "engrad/RT/0.7/fisf": {
+      "config": {
+        "hidden": 64,
+        "dropout": 0.5,
+        "lr": 0.001,
+        "k": 5,
+        "q": 8,
+        "likelihood": "not_applicable"
+      },
+      "validation_mae": 3.4773377659836493,
+      "candidate": 3
+    },
+    "engrad/RT/0.7/gcnmf": {
+      "config": {
+        "hidden": 16,
+        "dropout": 0.0,
+        "lr": 0.01,
+        "k": 5,
+        "q": 8,
+        "likelihood": "gaussian"
+      },
+      "validation_mae": 3.807375938662995,
+      "candidate": 10
+    },
+    "engrad/RT/0.7/gcnmf_pe": {
+      "config": {
+        "hidden": 32,
+        "dropout": 0.1,
+        "lr": 0.001,
+        "k": 3,
+        "q": 4,
+        "likelihood": "gaussian"
+      },
+      "validation_mae": 3.7488301484446733,
+      "candidate": 40
+    },
+    "engrad/RT/0.8/gnnzero": {
+      "config": {
+        "hidden": 128,
+        "dropout": 0.5,
+        "lr": 0.001,
+        "k": 5,
+        "q": 8,
+        "likelihood": "not_applicable"
+      },
+      "validation_mae": 4.004032564080717,
+      "candidate": 3
+    },
+    "engrad/RT/0.8/gnnmi": {
+      "config": {
+        "hidden": 128,
+        "dropout": 0.5,
+        "lr": 0.001,
+        "k": 5,
+        "q": 8,
+        "likelihood": "not_applicable"
+      },
+      "validation_mae": 4.005598299342691,
+      "candidate": 3
+    },
+    "engrad/RT/0.8/gnnmedian": {
+      "config": {
+        "hidden": 128,
+        "dropout": 0.5,
+        "lr": 0.001,
+        "k": 5,
+        "q": 8,
+        "likelihood": "not_applicable"
+      },
+      "validation_mae": 3.9839102636456363,
+      "candidate": 3
+    },
+    "engrad/RT/0.8/gnnmim": {
+      "config": {
+        "hidden": 128,
+        "dropout": 0.5,
+        "lr": 0.003,
+        "k": 5,
+        "q": 8,
+        "likelihood": "not_applicable"
+      },
+      "validation_mae": 4.160264878714839,
+      "candidate": 7
+    },
+    "engrad/RT/0.8/fp": {
+      "config": {
+        "hidden": 64,
+        "dropout": 0.5,
+        "lr": 0.001,
+        "k": 5,
+        "q": 8,
+        "likelihood": "not_applicable"
+      },
+      "validation_mae": 3.5725761946728487,
+      "candidate": 3
+    },
+    "engrad/RT/0.8/pcfi": {
+      "config": {
+        "hidden": 64,
+        "dropout": 0.5,
+        "lr": 0.01,
+        "k": 5,
+        "q": 8,
+        "likelihood": "not_applicable"
+      },
+      "validation_mae": 4.847776867760474,
+      "candidate": 11
+    },
+    "engrad/RT/0.8/fisf": {
+      "config": {
+        "hidden": 64,
+        "dropout": 0.5,
+        "lr": 0.001,
+        "k": 5,
+        "q": 8,
+        "likelihood": "not_applicable"
+      },
+      "validation_mae": 3.641794659094273,
+      "candidate": 3
+    },
+    "engrad/RT/0.8/gcnmf": {
+      "config": {
+        "hidden": 16,
+        "dropout": 0.5,
+        "lr": 0.001,
+        "k": 5,
+        "q": 8,
+        "likelihood": "gaussian"
+      },
+      "validation_mae": 4.034756517628498,
+      "candidate": 7
+    },
+    "engrad/RT/0.8/gcnmf_pe": {
+      "config": {
+        "hidden": 32,
+        "dropout": 0.0,
+        "lr": 0.01,
+        "k": 8,
+        "q": 16,
+        "likelihood": "gaussian"
+      },
+      "validation_mae": 3.8850789871340927,
+      "candidate": 36
+    },
+    "engrad/RT/0.9/gnnzero": {
+      "config": {
+        "hidden": 128,
+        "dropout": 0.5,
+        "lr": 0.001,
+        "k": 5,
+        "q": 8,
+        "likelihood": "not_applicable"
+      },
+      "validation_mae": 4.212185140086322,
+      "candidate": 3
+    },
+    "engrad/RT/0.9/gnnmi": {
+      "config": {
+        "hidden": 128,
+        "dropout": 0.5,
+        "lr": 0.001,
+        "k": 5,
+        "q": 8,
+        "likelihood": "not_applicable"
+      },
+      "validation_mae": 4.206003473333364,
+      "candidate": 3
+    },
+    "engrad/RT/0.9/gnnmedian": {
+      "config": {
+        "hidden": 128,
+        "dropout": 0.5,
+        "lr": 0.001,
+        "k": 5,
+        "q": 8,
+        "likelihood": "not_applicable"
+      },
+      "validation_mae": 4.186389538487409,
+      "candidate": 3
+    },
+    "engrad/RT/0.9/gnnmim": {
+      "config": {
+        "hidden": 128,
+        "dropout": 0.5,
+        "lr": 0.001,
+        "k": 5,
+        "q": 8,
+        "likelihood": "not_applicable"
+      },
+      "validation_mae": 4.322551189059075,
+      "candidate": 3
+    },
+    "engrad/RT/0.9/fp": {
+      "config": {
+        "hidden": 64,
+        "dropout": 0.5,
+        "lr": 0.001,
+        "k": 5,
+        "q": 8,
+        "likelihood": "not_applicable"
+      },
+      "validation_mae": 3.787237937298834,
+      "candidate": 3
+    },
+    "engrad/RT/0.9/pcfi": {
+      "config": {
+        "hidden": 64,
+        "dropout": 0.5,
+        "lr": 0.001,
+        "k": 5,
+        "q": 8,
+        "likelihood": "not_applicable"
+      },
+      "validation_mae": 4.690262936208594,
+      "candidate": 3
+    },
+    "engrad/RT/0.9/fisf": {
+      "config": {
+        "hidden": 64,
+        "dropout": 0.5,
+        "lr": 0.003,
+        "k": 5,
+        "q": 8,
+        "likelihood": "not_applicable"
+      },
+      "validation_mae": 4.003007861120293,
+      "candidate": 7
+    },
+    "engrad/RT/0.9/gcnmf": {
+      "config": {
+        "hidden": 16,
+        "dropout": 0.0,
+        "lr": 0.003,
+        "k": 5,
+        "q": 8,
+        "likelihood": "legacy"
+      },
+      "validation_mae": 4.25107159661668,
+      "candidate": 2
+    },
+    "engrad/RT/0.9/gcnmf_pe": {
+      "config": {
+        "hidden": 32,
+        "dropout": 0.5,
+        "lr": 0.003,
+        "k": 8,
+        "q": 8,
+        "likelihood": "gaussian"
+      },
+      "validation_mae": 4.154471427869392,
+      "candidate": 26
+    },
+    "engrad/RT/0.99/gnnzero": {
+      "config": {
+        "hidden": 128,
+        "dropout": 0.5,
+        "lr": 0.001,
+        "k": 5,
+        "q": 8,
+        "likelihood": "not_applicable"
+      },
+      "validation_mae": 4.362463441033314,
+      "candidate": 3
+    },
+    "engrad/RT/0.99/gnnmi": {
+      "config": {
+        "hidden": 128,
+        "dropout": 0.5,
+        "lr": 0.001,
+        "k": 5,
+        "q": 8,
+        "likelihood": "not_applicable"
+      },
+      "validation_mae": 4.3781427116812095,
+      "candidate": 3
+    },
+    "engrad/RT/0.99/gnnmedian": {
+      "config": {
+        "hidden": 128,
+        "dropout": 0.3,
+        "lr": 0.001,
+        "k": 5,
+        "q": 8,
+        "likelihood": "not_applicable"
+      },
+      "validation_mae": 4.365715777035118,
+      "candidate": 2
+    },
+    "engrad/RT/0.99/gnnmim": {
+      "config": {
+        "hidden": 128,
+        "dropout": 0.3,
+        "lr": 0.001,
+        "k": 5,
+        "q": 8,
+        "likelihood": "not_applicable"
+      },
+      "validation_mae": 4.374976052858865,
+      "candidate": 2
+    },
+    "engrad/RT/0.99/fp": {
+      "config": {
+        "hidden": 64,
+        "dropout": 0.3,
+        "lr": 0.001,
+        "k": 5,
+        "q": 8,
+        "likelihood": "not_applicable"
+      },
+      "validation_mae": 4.259242711339382,
+      "candidate": 2
+    },
+    "engrad/RT/0.99/pcfi": {
+      "config": {
+        "hidden": 64,
+        "dropout": 0.5,
+        "lr": 0.001,
+        "k": 5,
+        "q": 8,
+        "likelihood": "not_applicable"
+      },
+      "validation_mae": 4.534857830497185,
+      "candidate": 3
+    },
+    "engrad/RT/0.99/fisf": {
+      "config": {
+        "hidden": 64,
+        "dropout": 0.5,
+        "lr": 0.01,
+        "k": 5,
+        "q": 8,
+        "likelihood": "not_applicable"
+      },
+      "validation_mae": 4.772798702773469,
+      "candidate": 11
+    },
+    "engrad/RT/0.99/gcnmf": {
+      "config": {
+        "hidden": 16,
+        "dropout": 0.5,
+        "lr": 0.003,
+        "k": 5,
+        "q": 8,
+        "likelihood": "legacy"
+      },
+      "validation_mae": 4.437711090732506,
+      "candidate": 3
+    },
+    "engrad/RT/0.99/gcnmf_pe": {
+      "config": {
+        "hidden": 32,
+        "dropout": 0.3,
+        "lr": 0.001,
+        "k": 8,
+        "q": 16,
+        "likelihood": "gaussian"
+      },
+      "validation_mae": 4.312866053721244,
+      "candidate": 38
+    }
+  }
+}

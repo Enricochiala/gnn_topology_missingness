@@ -1,0 +1,444 @@
+[
+  {
+    "precipitation_unit": "cm",
+    "zero_radiation_is_observed": true,
+    "added_edges": [],
+    "dataset": "engrad",
+    "shape": [
+      26304,
+      487,
+      5
+    ],
+    "original_nonfinite_fraction": 0.0,
+    "benchmark_missing_fraction": 0.0,
+    "zero_fraction": 0.2665428888322667,
+    "directed_edges": 4594,
+    "components": 1,
+    "details": [
+      24,
+      6
+    ],
+    "first_timestamp": "2018-01-01 00:00:00",
+    "last_timestamp": "2020-12-31 23:00:00",
+    "prepared_sha256": "389865107504175d07ffeaa443580f9aa77783b051fa16a68fe6e8d2eace399a",
+    "split_bounds": [
+      [
+        0,
+        15312
+      ],
+      [
+        15312,
+        17520
+      ],
+      [
+        17520,
+        26304
+      ]
+    ],
+    "windows_stride_horizon": [
+      2548,
+      364,
+      1460
+    ]
+  },
+  {
+    "kernel_theta_km": 26.677869724607756,
+    "added_edges": [
+      [
+        60,
+        239
+      ],
+      [
+        368,
+        318
+      ],
+      [
+        180,
+        245
+      ],
+      [
+        203,
+        226
+      ],
+      [
+        206,
+        204
+      ],
+      [
+        222,
+        228
+      ],
+      [
+        223,
+        228
+      ],
+      [
+        224,
+        226
+      ],
+      [
+        225,
+        232
+      ],
+      [
+        226,
+        224
+      ],
+      [
+        227,
+        220
+      ],
+      [
+        245,
+        180
+      ],
+      [
+        239,
+        60
+      ],
+      [
+        241,
+        240
+      ],
+      [
+        244,
+        242
+      ],
+      [
+        246,
+        245
+      ],
+      [
+        326,
+        334
+      ],
+      [
+        309,
+        315
+      ],
+      [
+        318,
+        368
+      ],
+      [
+        333,
+        356
+      ],
+      [
+        334,
+        326
+      ],
+      [
+        349,
+        310
+      ],
+      [
+        351,
+        107
+      ],
+      [
+        357,
+        318
+      ],
+      [
+        375,
+        224
+      ],
+      [
+        391,
+        399
+      ],
+      [
+        405,
+        416
+      ],
+      [
+        412,
+        420
+      ],
+      [
+        420,
+        412
+      ],
+      [
+        424,
+        422
+      ],
+      [
+        430,
+        350
+      ],
+      [
+        431,
+        359
+      ],
+      [
+        435,
+        431
+      ],
+      [
+        243,
+        233
+      ],
+      [
+        348,
+        341
+      ],
+      [
+        233,
+        243
+      ],
+      [
+        203,
+        196
+      ],
+      [
+        341,
+        348
+      ],
+      [
+        415,
+        256
+      ]
+    ],
+    "ignores_imputation_evaluation_mask": true,
+    "dataset": "aqi",
+    "shape": [
+      8760,
+      437,
+      1
+    ],
+    "original_nonfinite_fraction": 0.256684220975309,
+    "benchmark_missing_fraction": 0.256684220975309,
+    "zero_fraction": 0.0,
+    "directed_edges": 5460,
+    "components": 2,
+    "details": [
+      24,
+      6
+    ],
+    "first_timestamp": "2014-05-01 00:00:00",
+    "last_timestamp": "2015-04-30 23:00:00",
+    "prepared_sha256": "f6bf5192c7afef16128083f5e8ff5ddaff659dd62b95ecd79cb133556e79e4c3",
+    "split_bounds": [
+      [
+        0,
+        6132
+      ],
+      [
+        6132,
+        7008
+      ],
+      [
+        7008,
+        8760
+      ]
+    ],
+    "windows_stride_horizon": [
+      1018,
+      142,
+      288
+    ]
+  },
+  {
+    "added_edges": [
+      [
+        1056,
+        1067
+      ],
+      [
+        654,
+        631
+      ],
+      [
+        631,
+        654
+      ],
+      [
+        1001,
+        1025
+      ],
+      [
+        820,
+        813
+      ],
+      [
+        912,
+        920
+      ],
+      [
+        1067,
+        1056
+      ],
+      [
+        865,
+        615
+      ],
+      [
+        615,
+        865
+      ]
+    ],
+    "excluded_broken_node": "04315",
+    "zero_policy": "original benchmark excludes nighttime zeros; not sensor missingness",
+    "timezone": "Etc/GMT+7",
+    "dataset": "pv_us",
+    "shape": [
+      26283,
+      1081,
+      1
+    ],
+    "original_nonfinite_fraction": 0.0001141422212076247,
+    "benchmark_missing_fraction": 0.5402061310668764,
+    "zero_fraction": 0.5400919888456688,
+    "directed_edges": 10562,
+    "components": 1,
+    "details": [
+      72,
+      6
+    ],
+    "first_timestamp": "2006-01-01 07:00:00",
+    "last_timestamp": "2007-01-01 07:40:00",
+    "prepared_sha256": "76929c6727b67084b4d1bc9869fd7c3d5fc73ee26d0b5acca77c8d7a4d5ff8db",
+    "split_bounds": [
+      [
+        0,
+        18398
+      ],
+      [
+        18398,
+        21026
+      ],
+      [
+        21026,
+        26283
+      ]
+    ],
+    "windows_stride_horizon": [
+      3054,
+      426,
+      864
+    ]
+  },
+  {
+    "dataset": "graphmso",
+    "shape": [
+      10000,
+      100,
+      1
+    ],
+    "original_nonfinite_fraction": 0.0,
+    "benchmark_missing_fraction": 0.0,
+    "zero_fraction": 0.0001,
+    "directed_edges": 300,
+    "components": 1,
+    "details": [
+      72,
+      36
+    ],
+    "first_timestamp": "0",
+    "last_timestamp": "9999",
+    "prepared_sha256": "1bf4c65f5678c0d6572e8edf48b29c7f99f39e96adda5c745fa24c1df7d3aace",
+    "split_bounds": [
+      [
+        0,
+        7000
+      ],
+      [
+        7000,
+        8000
+      ],
+      [
+        8000,
+        10000
+      ]
+    ],
+    "windows_stride_horizon": [
+      192,
+      25,
+      53
+    ]
+  },
+  {
+    "zero_policy": "zero speed treated as missing by official loader",
+    "directed": true,
+    "dataset": "metr_la",
+    "shape": [
+      34272,
+      207,
+      1
+    ],
+    "original_nonfinite_fraction": 0.0,
+    "benchmark_missing_fraction": 0.08109350825676487,
+    "zero_fraction": 0.08109350825676487,
+    "directed_edges": 1515,
+    "components": 2,
+    "details": [
+      24,
+      12
+    ],
+    "first_timestamp": "2012-03-01 00:00:00",
+    "last_timestamp": "2012-06-27 23:55:00",
+    "prepared_sha256": "b3e70379429bb4f9e62f59c6d5c7b72d0cfe4a62d1bf24156d85d6c5d4c093b3",
+    "split_bounds": [
+      [
+        0,
+        23990
+      ],
+      [
+        23990,
+        27417
+      ],
+      [
+        27417,
+        34272
+      ]
+    ],
+    "windows_stride_horizon": [
+      1997,
+      283,
+      569
+    ]
+  },
+  {
+    "zero_policy": "zero speed treated as missing by official loader",
+    "directed": true,
+    "dataset": "pems_bay",
+    "shape": [
+      52128,
+      325,
+      1
+    ],
+    "original_nonfinite_fraction": 0.00023020257826887662,
+    "benchmark_missing_fraction": 0.0002609552816735137,
+    "zero_fraction": 3.075270340463711e-05,
+    "directed_edges": 2369,
+    "components": 7,
+    "details": [
+      24,
+      12
+    ],
+    "first_timestamp": "2017-01-01 00:00:00",
+    "last_timestamp": "2017-06-30 23:55:00",
+    "prepared_sha256": "e55b5c4e6498625cd8d3cf272393541cf7ae2d66755fba0704ced6ff440585e6",
+    "split_bounds": [
+      [
+        0,
+        36489
+      ],
+      [
+        36489,
+        41702
+      ],
+      [
+        41702,
+        52128
+      ]
+    ],
+    "windows_stride_horizon": [
+      3038,
+      432,
+      866
+    ]
+  }
+]

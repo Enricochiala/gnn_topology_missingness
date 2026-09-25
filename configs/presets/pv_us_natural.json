@@ -1,0 +1,119 @@
+{
+  "dataset": "pv_us",
+  "mechanism": "natural",
+  "selection_criterion": "minimum validation MAE separately per rate",
+  "search_budget": "12 candidates per model and rate",
+  "input_hashes": {
+    "pv_us": "76929c6727b67084b4d1bc9869fd7c3d5fc73ee26d0b5acca77c8d7a4d5ff8db"
+  },
+  "selection": {
+    "pv_us/natural/0.0/gnnzero": {
+      "config": {
+        "hidden": 128,
+        "dropout": 0.5,
+        "lr": 0.003,
+        "k": 5,
+        "q": 8,
+        "likelihood": "not_applicable"
+      },
+      "validation_mae": 13.13356302770793,
+      "candidate": 7
+    },
+    "pv_us/natural/0.0/gnnmi": {
+      "config": {
+        "hidden": 128,
+        "dropout": 0.3,
+        "lr": 0.003,
+        "k": 5,
+        "q": 8,
+        "likelihood": "not_applicable"
+      },
+      "validation_mae": 13.133530548063096,
+      "candidate": 6
+    },
+    "pv_us/natural/0.0/gnnmedian": {
+      "config": {
+        "hidden": 128,
+        "dropout": 0.0,
+        "lr": 0.003,
+        "k": 5,
+        "q": 8,
+        "likelihood": "not_applicable"
+      },
+      "validation_mae": 13.01304760367377,
+      "candidate": 4
+    },
+    "pv_us/natural/0.0/gnnmim": {
+      "config": {
+        "hidden": 128,
+        "dropout": 0.5,
+        "lr": 0.001,
+        "k": 5,
+        "q": 8,
+        "likelihood": "not_applicable"
+      },
+      "validation_mae": 12.963727197092636,
+      "candidate": 3
+    },
+    "pv_us/natural/0.0/fp": {
+      "config": {
+        "hidden": 64,
+        "dropout": 0.3,
+        "lr": 0.003,
+        "k": 5,
+        "q": 8,
+        "likelihood": "not_applicable"
+      },
+      "validation_mae": 13.098438491649059,
+      "candidate": 6
+    },
+    "pv_us/natural/0.0/pcfi": {
+      "config": {
+        "hidden": 64,
+        "dropout": 0.5,
+        "lr": 0.003,
+        "k": 5,
+        "q": 8,
+        "likelihood": "not_applicable"
+      },
+      "validation_mae": 13.330428330886429,
+      "candidate": 7
+    },
+    "pv_us/natural/0.0/fisf": {
+      "config": {
+        "hidden": 64,
+        "dropout": 0.3,
+        "lr": 0.001,
+        "k": 5,
+        "q": 8,
+        "likelihood": "not_applicable"
+      },
+      "validation_mae": 13.071909080091102,
+      "candidate": 2
+    },
+    "pv_us/natural/0.0/gcnmf": {
+      "config": {
+        "hidden": 16,
+        "dropout": 0.0,
+        "lr": 0.01,
+        "k": 5,
+        "q": 8,
+        "likelihood": "gaussian"
+      },
+      "validation_mae": 12.573004513384,
+      "candidate": 10
+    },
+    "pv_us/natural/0.0/gcnmf_pe": {
+      "config": {
+        "hidden": 16,
+        "dropout": 0.5,
+        "lr": 0.01,
+        "k": 3,
+        "q": 4,
+        "likelihood": "gaussian"
+      },
+      "validation_mae": 12.670286729676969,
+      "candidate": 3
+    }
+  }
+}

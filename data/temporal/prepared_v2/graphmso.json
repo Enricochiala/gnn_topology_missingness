@@ -1,0 +1,39 @@
+{
+  "dataset": "graphmso",
+  "shape": [
+    10000,
+    100,
+    1
+  ],
+  "original_nonfinite_fraction": 0.0,
+  "benchmark_missing_fraction": 0.0,
+  "zero_fraction": 0.0001,
+  "directed_edges": 300,
+  "components": 1,
+  "details": [
+    72,
+    36
+  ],
+  "first_timestamp": "0",
+  "last_timestamp": "9999",
+  "prepared_sha256": "1bf4c65f5678c0d6572e8edf48b29c7f99f39e96adda5c745fa24c1df7d3aace",
+  "split_bounds": [
+    [
+      0,
+      7000
+    ],
+    [
+      7000,
+      8000
+    ],
+    [
+      8000,
+      10000
+    ]
+  ],
+  "windows_stride_horizon": [
+    192,
+    25,
+    53
+  ]
+}
