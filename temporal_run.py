@@ -2,7 +2,7 @@
 
 Use --phase tune to select configurations without computing test predictions.
 Use --phase test --selection DIR for untouched final-seed evaluations.
---phase reference evaluates fixed historical hyperparameters without tuning.
+The default test phase loads the fixed Appendix E configurations automatically.
 Any --max-windows / --epochs override is recorded as a pilot, not a full run.
 """
 import argparse
@@ -21,8 +21,7 @@ from fisf import FISF
 from temporal_imputation import DistanceLookup, FastPCFI, FastFISF
 
 ROOT=Path(__file__).resolve().parent
-CONTROLLED=('engrad','pems_bay','graphmso')
-RATES=[0.,.1,.2,.3,.4,.5,.6,.7,.8,.9,.99]
+from protocol import CONTROLLED, RATES, PRESETS, load_preset, validate_selection, select_curves
 
 
 def write_json(path,value):
@@ -42,21 +41,24 @@ def seed_all(seed):
 
 
 def reference_config(model):
+    """Base search configuration; final evaluation uses the dataset presets."""
     hidden=128 if model in ('gnnzero','gnnmi','gnnmedian','gnnmim') else 64
-    if model in ('gcnmf','gcnmf_pe'): hidden=16
-    return dict(hidden=hidden,dropout=.5,lr=.01,
-                k=5,q=8,likelihood='legacy' if model in ('gcnmf','gcnmf_pe') else 'not_applicable')
+    if model in ('gcnmf','PEMix'): hidden=16
+    short=model in ('gnnzero','gnnmi','gnnmedian','gnnmim','PEMix')
+    return dict(hidden=hidden,dropout=.5,lr=.01,weight_decay=0.,
+                max_epochs=500 if short else 1000,patience=50 if short else 40,
+                k=5,q=8 if model=='PEMix' else 0,
+                likelihood='gaussian' if model=='PEMix' else 'legacy' if model=='gcnmf' else 'not_applicable')
 
 
 def candidates(model):
+    """Twelve candidates per method, each evaluated on the same full curve."""
     ref=reference_config(model)
-    if model=='gcnmf_pe':
-        # Full observed Gaussian density implements the manuscript exactly.
-        grid=[dict(ref,k=k,q=q,likelihood='gaussian') for k in (2,3,5) for q in (4,8,16)]
-        grid += [dict(ref,lr=lr) for lr in (.001,.003,.01)]
+    if model=='PEMix':
+        grid=[dict(ref,k=k,q=q) for k in (2,3,5) for q in (4,8,16)]
+        grid += [dict(ref,hidden=32,dropout=.3,lr=.001,k=8,q=16),
+                 dict(ref,lr=.001),dict(ref,lr=.003)]
     elif model=='gcnmf':
-        # Offer the same density correction to the no-PE comparator: improvements
-        # must not be attributable solely to fixing SPAR's shared likelihood bug.
         grid=[dict(ref,likelihood=l,lr=lr,dropout=p) for l in ('legacy','gaussian')
               for lr in (.001,.003,.01) for p in (0.,.5)]
     else:
@@ -164,15 +166,15 @@ def metrics(model,split,center,scale,batch_size):
 def fit(model_name,config,seed,arrays,data,windows,args,checkpoint,embedding=None):
     seed_all(seed)
     graph=SpatialBatch(data['edge_index'],data['edge_weight'],data['values'].shape[1],args.device)
-    q=config['q'] if model_name=='gcnmf_pe' else 0
+    q=config['q'] if model_name=='PEMix' else 0
     init=gmm_init(arrays[0][0],data['pe'],q)
     model=StaticRegressor(model_name,arrays[0][0].shape[-1],arrays[0][1].shape[-1],graph,data['pe'],init,config,embedding)
     model=model.to(args.device)
     # Disables the debug anomaly hook enabled globally by the original models.
     torch.autograd.set_detect_anomaly(False)
-    optim=torch.optim.Adam(model.parameters(),lr=config['lr'])
-    maximum=args.epochs or (500 if model_name in ('gnnzero','gnnmi','gnnmedian','gnnmim','gcnmf_pe') else 1000)
-    patience=args.patience or (50 if maximum==500 else 40)
+    optim=torch.optim.Adam(model.parameters(),lr=config['lr'],weight_decay=config['weight_decay'])
+    maximum=args.epochs or config['max_epochs']
+    patience=args.patience or config['patience']
     center=torch.as_tensor(np.tile(windows.center,windows.horizon),device=args.device)
     scale=torch.as_tensor(np.tile(windows.scale,windows.horizon),device=args.device)
     x,y,valid=arrays[0]
@@ -235,10 +237,9 @@ def main():
     p.add_argument('--rates',nargs='+',type=float,default=RATES)
     p.add_argument('--mechanisms',nargs='+',choices=['RT','UMCAR'],default=['RT','UMCAR'])
     p.add_argument('--seeds',nargs='+',type=int,default=[1,43,15,118,222])
-    p.add_argument('--phase',choices=['reference','tune','test'],default='reference')
+    p.add_argument('--phase',choices=['tune','test'],default='test')
     p.add_argument('--selection',type=Path)
-    p.add_argument('--preset',type=Path,help='Frozen completed selection supplied in configs/presets')
-    p.add_argument('--extended-pemix',action='store_true',help='Use the 48-candidate PEMix search; other models keep 12 candidates')
+    p.add_argument('--preset',type=Path,help='Fixed configuration file; matching bundled presets are loaded automatically by default')
     p.add_argument('--mask-cache',type=Path,default=Path('cache/rt_masks'))
     p.add_argument('--epochs',type=int);p.add_argument('--patience',type=int)
     p.add_argument('--max-windows',type=int,help='Pilot only; deterministic coverage per split')
@@ -260,7 +261,9 @@ def main():
     if args.phase=='tune' and args.seeds!=[2026]:p.error('Tuning uses --seeds 2026; reserve the five final seeds')
     if args.selection and args.preset:p.error('Use only one of --selection and --preset')
     if args.preset and args.phase!='test':p.error('--preset requires --phase test')
-    if args.phase=='test' and args.selection is None and args.preset is None:p.error('Final tuned test requires --selection or --preset')
+    if args.selection and args.phase!='test':p.error('--selection requires --phase test')
+    if args.phase=='tune' and any(ds in CONTROLLED for ds in args.datasets) and sorted(args.rates)!=RATES and args.max_windows is None and args.epochs is None:
+        p.error('Controlled tuning requires the full missingness curve; use --epochs or --max-windows for a pilot')
     if args.phase!='tune' and 2026 in args.seeds:p.error('2026 is reserved for tuning')
     args.out=args.out.resolve();args.out.mkdir(parents=True,exist_ok=True)
     import fcntl
@@ -268,12 +271,12 @@ def main():
     try:fcntl.flock(run_lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
     except BlockingIOError:p.error('Another process is already writing this output directory')
     config={k:str(v) if isinstance(v,Path) else v for k,v in vars(args).items() if k!='out'}
-    config['pilot']=args.max_windows is not None or args.epochs is not None
-    config['search_space_sha256']=sha256(ROOT/'configs/extended_search.json')
-    config['preset_sha256']=sha256(args.preset) if args.preset else None
+    config['pilot']=any(v is not None for v in (args.max_windows,args.epochs,args.patience,args.stride))
+    config['preset_hashes']={str(v.name):sha256(v) for v in ([args.preset] if args.preset else sorted(PRESETS.glob('*.json'))) }
+    config['selection_sha256']=sha256(args.selection/'selection.json') if args.selection else None
     config['source_hashes']={v.name:sha256(v) for v in sorted(v for v in ROOT.iterdir() if v.suffix in ('.py','.cpp'))}
     config['input_hashes']={v:sha256(args.data_dir/f'{v}.npz') for v in args.datasets}
-    config['versions']={v:importlib.metadata.version(v) for v in ('torch','torch-geometric','numpy','scipy','pandas','scikit-learn','gensim')}
+    config['versions']={v:importlib.metadata.version(v) for v in ('torch','torch-geometric','numpy','scipy','pandas','scikit-learn')}
     config['python']=platform.python_version()
     config['device_name']=torch.cuda.get_device_name(0) if args.device=='cuda' else platform.processor()
     config['cuda_runtime']=torch.version.cuda
@@ -299,14 +302,17 @@ def main():
         if sc['source_hashes']!=config['source_hashes'] or sc['input_hashes']!=config['input_hashes']:
             raise ValueError('Selection source/input hashes mismatch')
         if sc['pilot'] and not config['pilot']:raise ValueError('Pilot hyperparameters cannot silently become full results')
-        for field in ('versions','python','batch_size','stride','epochs','patience','max_windows','extended_pemix','search_space_sha256'):
+        for field in ('versions','python','batch_size','stride','epochs','patience','max_windows'):
             if sc[field]!=config[field]:raise ValueError(f'Selection mismatch: {field}')
-    if args.preset:
-        preset=json.loads(args.preset.read_text())
-        for name in args.datasets:
-            if preset['input_hashes'].get(name)!=config['input_hashes'][name]:
-                raise ValueError('Preset input fingerprint mismatch')
-        selection=preset['selection']
+    if args.phase=='test' and selection is None:
+        selection={}
+        paths=[args.preset] if args.preset else [
+            PRESETS/f'{name}_{mechanism}.json' for name in args.datasets
+            for mechanism in (args.mechanisms if name in CONTROLLED else ['natural'])]
+        for path in paths:
+            selection.update(load_preset(path,config['input_hashes'],args.rates,args.models))
+    if selection is not None:
+        validate_selection(selection,args.datasets,args.mechanisms,args.rates,args.models)
     torch.set_num_threads(args.threads);torch.autograd.set_detect_anomaly(False)
     expected=0
     with threadpool_limits(limits=args.threads):
@@ -336,9 +342,6 @@ def main():
                         write_json(mask_manifest,dict(sha256=sha256(maskpath),**metadata))
                     for model in args.models:
                         configs=candidates(model) if args.phase=='tune' else [reference_config(model)]
-                        if args.phase=='tune' and args.extended_pemix and model=='gcnmf_pe':
-                            from extended_search import pemix_candidates
-                            configs=pemix_candidates()
                         if selection is not None:
                             configs=[selection[f'{name}/{mechanism}/{rate}/{model}']['config']]
                         expected+=len(configs)
@@ -373,14 +376,8 @@ def main():
                         print(f'{tag} {model}: '+', '.join(r['status'] for r in records[-len(pending):]),flush=True)
     if len(done)!=expected:raise ValueError(f'Unexpected fit count: {len(done)} != {expected}')
     failed=sum(r['status']!='ok' for r in records)
-    if args.phase=='tune':
-        chosen={}
-        for row in records:
-            if row['status']!='ok':continue
-            key=f'{row["dataset"]}/{row["mechanism"]}/{row["rate"]}/{row["model"]}'
-            if key not in chosen or row['validation_mae']<chosen[key]['validation_mae']:
-                chosen[key]={k:row[k] for k in ('config','validation_mae','candidate')}
-        write_json(args.out/'selection.json',chosen)
+    if args.phase=='tune' and not failed:
+        write_json(args.out/'selection.json',select_curves(records,args.rates))
     write_json(args.out/'COMPLETE.json',dict(attempted=len(done),failed=failed,pilot=config['pilot'],phase=args.phase))
     raise SystemExit(bool(failed))
 

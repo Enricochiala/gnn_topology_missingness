@@ -24,7 +24,7 @@ warnings.filterwarnings("ignore", category=FutureWarning)
 warnings.filterwarnings("ignore", category=UserWarning, module='torch_geometric.typing')
 warnings.filterwarnings("ignore")
 
-torch.autograd.set_detect_anomaly(True)
+
 
 def _default_torch_device():
     if torch.cuda.is_available():
@@ -244,12 +244,12 @@ class GCNmfConv(nn.Module):
         return torch.sum(expected_x * gamma.unsqueeze(2), dim=0)
 
 
-class GCNmfPEOnlyGMMConv(nn.Module):
-    'GCNmf layer where PE affects only GMM responsibilities, not propagation.'
+class PEMixGMMConv(nn.Module):
+    'PEMix probabilistic layer: PE affects mixture responsibilities, not propagation.'
 
 
     def __init__(self, x_features, pe_features, out_features, data, n_components, dropout):
-        super(GCNmfPEOnlyGMMConv, self).__init__()
+        super(PEMixGMMConv, self).__init__()
         self.x_features = int(x_features)
         self.pe_features = int(pe_features)
         self.in_features = self.x_features + self.pe_features
@@ -278,14 +278,22 @@ class GCNmfPEOnlyGMMConv(nn.Module):
         self.means.data = torch.tensor(means, device=param_device, dtype=torch.float32)
         self.logvars.data = torch.log(torch.tensor(covariances, device=param_device, dtype=torch.float32) + 1e-10)
 
+    def responsibilities(self, z):
+        """Eq. (12): normalized diagonal Gaussian on observed features and PE."""
+        observed = ~torch.isnan(z)
+        logvars = self.logvars.clamp(-14, 14)
+        diff = torch.where(observed[None], torch.nan_to_num(z)[None] - self.means[:, None], 0.)
+        terms = diff.square() * torch.exp(-logvars[:, None]) + logvars[:, None]
+        terms = torch.where(observed[None], terms, 0.)
+        # The observed-coordinate 2*pi constant is identical across components.
+        return torch.softmax(F.log_softmax(self.logp, 0)[:, None] - .5 * terms.sum(-1), dim=0)
+
     def forward(self, x, adj, edge_index):
         x_orig = x[:, :self.x_features]
         x_imp = x_orig.repeat(self.n_components, 1, 1)
-        z_imp = x[:, :self.in_features].repeat(self.n_components, 1, 1)
 
         x_isnan = torch.isnan(x_imp)
-        z_isnan = torch.isnan(z_imp)
-        variances = torch.exp(self.logvars).clamp(min=1e-10)
+        variances = torch.exp(self.logvars.clamp(-14, 14))
 
         means_x = self.means[:, :self.x_features]
         vars_x = variances[:, :self.x_features]
@@ -299,10 +307,7 @@ class GCNmfPEOnlyGMMConv(nn.Module):
         conv_v = torch.stack([torch.spmm(self.adj2, tv_k) for tv_k in tv])
         expected_x = ex_relu(conv_x, conv_v)
 
-        mean_z = torch.where(z_isnan, self.means.unsqueeze(1).expand_as(z_imp), z_imp)
-        dist = torch.sum(torch.pow(mean_z - self.means.unsqueeze(1), 2) / variances.unsqueeze(1), 2)
-        log_prob = self.logp.unsqueeze(1) - 0.5 * dist
-        gamma = torch.softmax(log_prob, dim=0)
+        gamma = self.responsibilities(x[:, :self.in_features])
 
         return torch.sum(expected_x * gamma.unsqueeze(2), dim=0)
 
@@ -688,10 +693,10 @@ class PCFI(torch.nn.Module):
 
 
     
-class GCNmf_PE(nn.Module):
-    def __init__(self, data, nhid=16, dropout=0.5, n_components=5, pe_dim=8,
+class PEMix(nn.Module):
+    def __init__(self, data, nhid=16, dropout=0.0, n_components=5, pe_dim=8,
                  init_x=None):
-        super(GCNmf_PE, self).__init__()
+        super(PEMix, self).__init__()
         self.x_channels = data.num_features
         self.pe_dim = pe_dim
         self.in_channels = self.x_channels + self.pe_dim
@@ -711,7 +716,7 @@ class GCNmf_PE(nn.Module):
         if hasattr(data, 'adj'): fake_data.adj = data.adj.cpu()
 
 
-        self.gc1 = GCNmfPEOnlyGMMConv(
+        self.gc1 = PEMixGMMConv(
             self.x_channels, self.pe_dim, nhid, fake_data, n_components, dropout
         )
         self.classifier = GCNConv(nhid, int(data.y.max() + 1))
@@ -719,16 +724,16 @@ class GCNmf_PE(nn.Module):
 
     def forward(self, x, adj, edge_index): 
         x = self.gc1(x, adj, edge_index)
-        x = F.relu(x)
+        x = F.dropout(x, p=self.dropout, training=self.training)
         return self.classifier(x, edge_index) 
 
 
-class GCNmf_PE_Full(nn.Module):
-    'Legacy early-fusion GCNmf-PE: PE is also transformed and propagated.'
+class PEMixFull(nn.Module):
+    'Early-fusion ablation in which PE is also transformed and propagated.'
 
     def __init__(self, data, nhid=16, dropout=0.5, n_components=5, pe_dim=8,
                  init_x=None):
-        super(GCNmf_PE_Full, self).__init__()
+        super(PEMixFull, self).__init__()
         self.in_channels = data.num_features + pe_dim
 
         from torch_geometric.data import Data

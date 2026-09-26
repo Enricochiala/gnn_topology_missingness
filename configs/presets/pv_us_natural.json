@@ -1,119 +1,111 @@
 {
+  "schema_version": 2,
   "dataset": "pv_us",
   "mechanism": "natural",
-  "selection_criterion": "minimum validation MAE separately per rate",
-  "search_budget": "12 candidates per model and rate",
+  "configuration_source": "Appendix E, Table 31; PEMix responsibilities: Eq. (12)",
+  "scope": "one configuration per model and mechanism, fixed across missingness rates",
   "input_hashes": {
     "pv_us": "76929c6727b67084b4d1bc9869fd7c3d5fc73ee26d0b5acca77c8d7a4d5ff8db"
   },
-  "selection": {
-    "pv_us/natural/0.0/gnnzero": {
-      "config": {
-        "hidden": 128,
-        "dropout": 0.5,
-        "lr": 0.003,
-        "k": 5,
-        "q": 8,
-        "likelihood": "not_applicable"
-      },
-      "validation_mae": 13.13356302770793,
-      "candidate": 7
+  "models": {
+    "gnnzero": {
+      "hidden": 128,
+      "dropout": 0.5,
+      "lr": 0.003,
+      "weight_decay": 0.0,
+      "max_epochs": 500,
+      "patience": 50,
+      "k": 5,
+      "q": 0,
+      "likelihood": "not_applicable"
     },
-    "pv_us/natural/0.0/gnnmi": {
-      "config": {
-        "hidden": 128,
-        "dropout": 0.3,
-        "lr": 0.003,
-        "k": 5,
-        "q": 8,
-        "likelihood": "not_applicable"
-      },
-      "validation_mae": 13.133530548063096,
-      "candidate": 6
+    "gnnmi": {
+      "hidden": 128,
+      "dropout": 0.3,
+      "lr": 0.003,
+      "weight_decay": 0.0,
+      "max_epochs": 500,
+      "patience": 50,
+      "k": 5,
+      "q": 0,
+      "likelihood": "not_applicable"
     },
-    "pv_us/natural/0.0/gnnmedian": {
-      "config": {
-        "hidden": 128,
-        "dropout": 0.0,
-        "lr": 0.003,
-        "k": 5,
-        "q": 8,
-        "likelihood": "not_applicable"
-      },
-      "validation_mae": 13.01304760367377,
-      "candidate": 4
+    "gnnmedian": {
+      "hidden": 128,
+      "dropout": 0,
+      "lr": 0.003,
+      "weight_decay": 0.0,
+      "max_epochs": 500,
+      "patience": 50,
+      "k": 5,
+      "q": 0,
+      "likelihood": "not_applicable"
     },
-    "pv_us/natural/0.0/gnnmim": {
-      "config": {
-        "hidden": 128,
-        "dropout": 0.5,
-        "lr": 0.001,
-        "k": 5,
-        "q": 8,
-        "likelihood": "not_applicable"
-      },
-      "validation_mae": 12.963727197092636,
-      "candidate": 3
+    "gnnmim": {
+      "hidden": 128,
+      "dropout": 0.5,
+      "lr": 0.001,
+      "weight_decay": 0.0,
+      "max_epochs": 500,
+      "patience": 50,
+      "k": 5,
+      "q": 0,
+      "likelihood": "not_applicable"
     },
-    "pv_us/natural/0.0/fp": {
-      "config": {
-        "hidden": 64,
-        "dropout": 0.3,
-        "lr": 0.003,
-        "k": 5,
-        "q": 8,
-        "likelihood": "not_applicable"
-      },
-      "validation_mae": 13.098438491649059,
-      "candidate": 6
+    "fp": {
+      "hidden": 64,
+      "dropout": 0.3,
+      "lr": 0.003,
+      "weight_decay": 0.0,
+      "max_epochs": 1000,
+      "patience": 40,
+      "k": 5,
+      "q": 0,
+      "likelihood": "not_applicable"
     },
-    "pv_us/natural/0.0/pcfi": {
-      "config": {
-        "hidden": 64,
-        "dropout": 0.5,
-        "lr": 0.003,
-        "k": 5,
-        "q": 8,
-        "likelihood": "not_applicable"
-      },
-      "validation_mae": 13.330428330886429,
-      "candidate": 7
+    "pcfi": {
+      "hidden": 64,
+      "dropout": 0.5,
+      "lr": 0.003,
+      "weight_decay": 0.0,
+      "max_epochs": 1000,
+      "patience": 40,
+      "k": 5,
+      "q": 0,
+      "likelihood": "not_applicable"
     },
-    "pv_us/natural/0.0/fisf": {
-      "config": {
-        "hidden": 64,
-        "dropout": 0.3,
-        "lr": 0.001,
-        "k": 5,
-        "q": 8,
-        "likelihood": "not_applicable"
-      },
-      "validation_mae": 13.071909080091102,
-      "candidate": 2
+    "fisf": {
+      "hidden": 64,
+      "dropout": 0.3,
+      "lr": 0.001,
+      "weight_decay": 0.0,
+      "max_epochs": 1000,
+      "patience": 40,
+      "k": 5,
+      "q": 0,
+      "likelihood": "not_applicable"
     },
-    "pv_us/natural/0.0/gcnmf": {
-      "config": {
-        "hidden": 16,
-        "dropout": 0.0,
-        "lr": 0.01,
-        "k": 5,
-        "q": 8,
-        "likelihood": "gaussian"
-      },
-      "validation_mae": 12.573004513384,
-      "candidate": 10
+    "gcnmf": {
+      "hidden": 16,
+      "dropout": 0,
+      "lr": 0.01,
+      "weight_decay": 0.0,
+      "max_epochs": 1000,
+      "patience": 40,
+      "k": 5,
+      "q": 0,
+      "likelihood": "gaussian"
     },
-    "pv_us/natural/0.0/gcnmf_pe": {
-      "config": {
-        "hidden": 16,
-        "dropout": 0.5,
-        "lr": 0.01,
-        "k": 3,
-        "q": 4,
-        "likelihood": "gaussian"
-      },
-      "validation_mae": 12.670286729676969,
-      "candidate": 3
+    "PEMix": {
+      "hidden": 16,
+      "dropout": 0.5,
+      "lr": 0.01,
+      "weight_decay": 0.0,
+      "max_epochs": 500,
+      "patience": 50,
+      "k": 3,
+      "q": 4,
+      "likelihood": "gaussian"
     }
   }
 }

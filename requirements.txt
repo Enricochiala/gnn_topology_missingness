@@ -8,7 +8,7 @@ scikit-learn==1.7.1
 pandas==2.3.3
 networkx==3.6.1
 matplotlib==3.11.0
-gensim==4.4.0
 tqdm==4.67.3
 threadpoolctl==3.6.0
 tabulate==0.9.0
+tables==3.10.2

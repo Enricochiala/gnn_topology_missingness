@@ -3,7 +3,7 @@ from unittest.mock import patch
 import numpy as np
 import torch
 from temporal_data import StaticWindows,WINDOWS,artificial_mask,topology_pe
-from temporal_models import GaussianSPAR,SpatialBatch,StaticRegressor
+from temporal_models import GaussianPEMix,SpatialBatch,StaticRegressor
 from temporal_run import reference_config,gmm_init,make_inputs
 from torch_geometric.data import Data
 from tempfile import TemporaryDirectory
@@ -49,10 +49,10 @@ class TemporalTests(unittest.TestCase):
         self.assertEqual(small.sum(),43);self.assertEqual(large.sum(),172)
         self.assertFalse(artificial_mask(self.edges,(9,12,2),9,0,'RT').any())
 
-    def test_spar_matches_normalized_density_and_gradients(self):
+    def test_pemix_matches_normalized_density_and_gradients(self):
         z=torch.tensor([[1.,float('nan'),.2],[float('nan'),float('nan'),-.1],[.5,2.,.7]])
         eye=torch.eye(3).to_sparse();data=Data(x=z,adj=eye)
-        layer=GaussianSPAR(2,1,4,data,2,0.)
+        layer=GaussianPEMix(2,1,4,data,2,0.)
         with torch.no_grad():
             layer.means.copy_(torch.tensor([[0.,1.,0.],[1.,0.,.5]]))
             layer.logvars.copy_(torch.log(torch.tensor([[1.,2.,.5],[3.,.2,2.]])))

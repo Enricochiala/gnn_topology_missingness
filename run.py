@@ -16,7 +16,7 @@ import torch
 from threadpoolctl import threadpool_limits
 
 from paper_data import DATASETS, load_dataset
-from experiments import ABLATIONS, MAIN_MODELS, MECHANISMS, evaluate, make_entries
+from experiments import MAIN_MODELS, MECHANISMS, evaluate, make_entries
 
 ROOT = Path(__file__).resolve().parent
 KEYS = ('dataset', 'model', 'seed', 'mu', 'mechanism')
@@ -50,13 +50,13 @@ def main():
     parser.add_argument('--datasets', nargs='+', choices=DATASETS, default=list(DATASETS))
     parser.add_argument('--data-dir', type=Path, required=True)
     parser.add_argument('--prepared', action='store_true', help='Input already includes preprocessing and frozen PE')
-    parser.add_argument('--models', nargs='+', choices=MAIN_MODELS + ABLATIONS + ('all',), default=['fp', 'pcfi', 'gcnmf_pe'])
+    parser.add_argument('--models', nargs='+', choices=MAIN_MODELS + ('all',), default=['all'])
     parser.add_argument('--mechanisms', nargs='+', choices=MECHANISMS, default=['UMCAR', 'RT'])
     parser.add_argument('--seeds', nargs='+', type=int, default=[1, 43, 15, 118, 222])
     parser.add_argument('--rates', nargs='+', type=float, default=[0., .1, .2, .3, .4, .5, .6, .7, .8, .9, .99])
     parser.add_argument('--pe-dim', type=positive, default=8)
     parser.add_argument('--recompute-pe', action='store_true')
-    parser.add_argument('--n-components', type=positive, default=5, help='For GCNmf-PE and its fusion ablations; plain GCNmf remains K=5')
+    parser.add_argument('--n-components', type=positive, default=5, help='For PEMix; plain GCNmf remains K=5')
     parser.add_argument('--device', choices=['cpu', 'cuda'], default='cpu')
     parser.add_argument('--max-epochs', type=positive, default=None, help='Optional override; omit for paper defaults')
     parser.add_argument('--patience', type=positive, default=None)
@@ -75,11 +75,12 @@ def main():
     args.out.mkdir(parents=True, exist_ok=True)
     config = {k: str(v) if isinstance(v, Path) else v for k, v in vars(args).items()
               if k not in ('out', 'data_dir')}
+    config['pilot'] = any(v is not None for v in (args.max_epochs, args.patience)) or args.pe_dim != 8 or args.n_components != 5
     config['source_hashes'] = {p.name: sha256(p) for p in sorted(ROOT.glob('*.py'))}
     config['input_hashes'] = {d: sha256(args.data_dir / f'{d}.pt') for d in args.datasets}
     config['versions'] = {n: importlib.metadata.version(n) for n in
                          ('torch', 'torch-geometric', 'numpy', 'scipy', 'scikit-learn',
-                          'networkx', 'gensim', 'pandas', 'threadpoolctl')}
+                          'networkx', 'pandas', 'threadpoolctl')}
     config['python'] = platform.python_version()
     config['machine'] = platform.platform()
     config_file = args.out / 'config.json'
@@ -136,7 +137,7 @@ def main():
                             np.random.seed(seed)
                             random.seed(seed)
                             record = dict(zip(KEYS, key))
-                            record.update(mask_hash=tensor_hash(mask), pe_hash=tensor_metadata['pe'],
+                            record.update(pilot=config['pilot'], mask_hash=tensor_hash(mask), pe_hash=tensor_metadata['pe'],
                                 split_hash=tensor_hash(torch.stack([entry[k] for k in ('train_mask', 'val_mask', 'test_mask')])),
                                 actual_missingness=float(mask.float().mean()),
                                 fully_missing_rows=float(mask.all(1).float().mean()))
@@ -166,7 +167,7 @@ def main():
     if len(done) != expected:
         raise RuntimeError(f'Unexpected result count: {len(done)} != {expected}')
     write_json(args.out / 'COMPLETE.json', {'attempted': len(done), 'failed': failed,
-                                           'successful': len(done) - failed})
+                                           'pilot': config['pilot'], 'successful': len(done) - failed})
     print(f'Completed {len(done)} attempts; {failed} failures. Saved in {args.out}')
     raise SystemExit(1 if failed else 0)
 

@@ -1,6 +1,6 @@
 """Static repository architectures adapted to continuous multi-horizon targets.
 
-See README.md for the forecasting protocol and likelihood variants.
+PEMix uses the normalized observed-coordinate density in Eq. (12).
 """
 import numpy as np
 import torch
@@ -9,29 +9,11 @@ import torch.nn.functional as F
 from torch_geometric.nn import GCNConv
 from torch_geometric.data import Data
 from torch_geometric.nn.conv.gcn_conv import gcn_norm
-from models import GCNFull, GCNmfConv, GCNmfPEOnlyGMMConv, ex_relu
+from models import GCNFull, GCNmfConv, PEMixGMMConv, ex_relu
 
 
-class GaussianSPAR(GCNmfPEOnlyGMMConv):
-    """Equations (17), (20)-(23): normalized Gaussian observed likelihood."""
-    def responsibilities(self, z):
-        observed=~torch.isnan(z)
-        # where before subtracting avoids NaN gradients in missing coordinates.
-        diff=torch.where(observed[None],torch.nan_to_num(z)[None]-self.means[:,None],0.)
-        logvars=self.logvars.clamp(-14,14)
-        terms=diff.square()*torch.exp(-logvars[:,None])+logvars[:,None]
-        terms=torch.where(observed[None],terms,0.)
-        return torch.softmax(F.log_softmax(self.logp,0)[:,None]-.5*terms.sum(-1),dim=0)
-
-    def forward(self,z,adj,edge_index):
-        x=z[:,:self.x_features]; missing=torch.isnan(x)[None]
-        means=torch.where(missing,self.means[:,:self.x_features,None].transpose(1,2),torch.nan_to_num(x)[None])
-        variances=torch.where(missing,torch.exp(self.logvars[:,:self.x_features].clamp(-14,14))[:,None],0.)
-        tx=means@self.weight+self.bias
-        tv=variances@self.weight.square()
-        mx=torch.stack([torch.sparse.mm(adj,v) for v in tx])
-        vx=torch.stack([torch.sparse.mm(adj.square(),v) for v in tv])
-        return (ex_relu(mx,vx)*self.responsibilities(z)[:,:,None]).sum(0)
+# Shared implementation for classification and forecasting.
+GaussianPEMix = PEMixGMMConv
 
 
 class SpatialBatch:
@@ -57,28 +39,30 @@ class StaticRegressor(nn.Module):
         if name not in MAIN_MODELS: raise ValueError(f'Unknown model: {name}')
         self.name=name; self.graph=graph; self.outputs=outputs
         hidden=config['hidden']; dropout=config['dropout']; self.dropout=dropout
+        if name=='PEMix' and pe.shape[1]<config['q']:
+            raise ValueError('Insufficient prepared positional-encoding dimensions')
         self.register_buffer('pe',torch.as_tensor(pe[:,:config.get('q',8)],device=graph.device))
-        if name in ('gcnmf','gcnmf_pe'):
-            q=self.pe.shape[1] if name=='gcnmf_pe' else 0
+        if name in ('gcnmf','PEMix'):
+            q=self.pe.shape[1] if name=='PEMix' else 0
             fake=Data(x=torch.as_tensor(init_x),edge_index=graph.edges.cpu())
             fake.adj=graph.get(1)[2].cpu()
             if name=='gcnmf':
-                self.first=GaussianSPAR(features,0,hidden,fake,5,dropout) if config.get('likelihood')=='gaussian' else GCNmfConv(features,hidden,fake,5,dropout)
+                self.first=GaussianPEMix(features,0,hidden,fake,config.get('k',5),dropout) if config.get('likelihood')=='gaussian' else GCNmfConv(features,hidden,fake,config.get('k',5),dropout)
             else:
-                cls=GaussianSPAR if config.get('likelihood','gaussian')=='gaussian' else GCNmfPEOnlyGMMConv
-                self.first=cls(features,q,hidden,fake,config.get('k',5),dropout)
+                if config.get('likelihood') != 'gaussian':
+                    raise ValueError('PEMix requires the normalized Gaussian likelihood')
+                self.first=PEMixGMMConv(features,q,hidden,fake,config.get('k',5),dropout)
             self.final=GCNConv(hidden,outputs)
         else:
             self.gcn=GCNFull(features,hidden,outputs,num_layers=2,dropout=dropout)
 
     def forward(self,x):
         b,n,d=x.shape; edge,weight,adj=self.graph.get(b); flat=x.reshape(b*n,d)
-        if self.name in ('gcnmf','gcnmf_pe'):
-            if self.name=='gcnmf_pe': flat=torch.cat([flat,self.pe.repeat(b,1)],1)
+        if self.name in ('gcnmf','PEMix'):
+            if self.name=='PEMix': flat=torch.cat([flat,self.pe.repeat(b,1)],1)
             self.first.adj2=adj.square()
             z=self.first(flat,adj,edge)
-            # Original SPAR has no active dropout; expose this standard GCN
-            # regularizer as a documented validation hyperparameter.
+            # Apply the configured dropout before the final graph-convolution layer.
             z=F.dropout(z,p=self.dropout,training=self.training)
             out=self.final(z,edge,weight)
         else:

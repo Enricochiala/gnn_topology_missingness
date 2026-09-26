@@ -12,6 +12,8 @@ def summarize(root):
     if not rows:raise ValueError('No attempted fits')
     df=pd.DataFrame(rows);df.to_csv(root/'per_seed.csv',index=False)
     if cfg['phase']=='tune':return
+    from curve_summary import export_auc
+    export_auc(rows,cfg,root,'rate','mae')
     expected=set(cfg['seeds']);summary=[]
     for key,part in df.groupby(['dataset','mechanism','rate','model'],dropna=False):
         good=part[part.status=='ok']; seeds=set(good.seed)

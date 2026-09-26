@@ -29,14 +29,21 @@ def main():
     groups = defaultdict(list)
     for row in rows:
         groups[(row['dataset'], row['model'], row['mechanism'], row['mu'])].append(row)
+    config = json.loads((args.folder / 'config.json').read_text())
+    from curve_summary import export_auc
+    export_auc(rows,config,args.folder,'mu','f1')
     summary = []
     for key, attempts in sorted(groups.items()):
         row = dict(zip(('dataset', 'model', 'mechanism', 'mu'), key))
         valid = [r for r in attempts if r['status'] == 'ok']
         row.update(n_attempted=len(attempts), n_successful=len(valid), n_failed=len(attempts)-len(valid))
+        complete = len(valid) == len(config['seeds']) and {r['seed'] for r in valid} == set(config['seeds'])
+        row.update(complete=complete, pilot=config.get('pilot', False))
         for metric in ('f1', 'accuracy', 'roc_auc', 'actual_missingness', 'fully_missing_rows'):
             values = [r[metric] for r in (attempts if metric in ('actual_missingness', 'fully_missing_rows') else valid)
                       if r.get(metric) is not None]
+            if metric in ('f1', 'accuracy', 'roc_auc') and not complete:
+                values = []
             row[f'{metric}_mean'] = float(np.mean(values)) if values else None
             row[f'{metric}_sd'] = float(np.std(values, ddof=1)) if len(values) > 1 else None
         summary.append(row)

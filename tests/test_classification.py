@@ -3,7 +3,7 @@ import torch
 from torch_geometric.data import Data
 from experiments import MAIN_MODELS, MECHANISMS, make_entries
 from shared_seed_reference import rtmar_shared_seed_mask
-from extended_search import pemix_candidates
+from temporal_run import candidates
 
 class ClassificationTests(unittest.TestCase):
     def test_paired_splits_and_rt_reference(self):
@@ -22,6 +22,7 @@ class ClassificationTests(unittest.TestCase):
     def test_nine_main_methods_and_search(self):
         self.assertEqual(len(MAIN_MODELS),9)
         self.assertEqual(set(MECHANISMS),{'RT','UMCAR'})
-        self.assertEqual(len(pemix_candidates()),48)
+        for model in MAIN_MODELS:
+            self.assertEqual(len(candidates(model)),12)
 
 if __name__=='__main__':unittest.main()

@@ -105,7 +105,7 @@ def _rocauc_from_logits(out, mask, y):
     return _metric_from_logits(out, mask, y, "rocauc")
 
 def fill_nan_with_col_mean_split(X, train_val_mask, test_mask):
-    'Fill NaNs using column means from train+val for both train+val and test rows.'
+    'Fill NaNs using column means from the supplied fitting rows.'
 
 
     X_filled = X.clone()
@@ -156,7 +156,9 @@ def evaluate_gcnmf(
         edge_index = data.edge_index.to(device)
         adj = data.adj.to(device)
 
-        model = GCNmf(data, nhid=16, dropout=0.0, n_components=5).to(device)
+        mixture_data = data.clone()
+        mixture_data.x = x
+        model = GCNmf(mixture_data, nhid=16, dropout=0.0, n_components=5).to(device)
 
 
         if hasattr(model, "gc1") and hasattr(model.gc1, "features"):
@@ -164,7 +166,7 @@ def evaluate_gcnmf(
         model.reset_parameters()
         optimizer = torch.optim.Adam(model.parameters(), lr=0.01, weight_decay=1e-5)
 
-        best_val_f1 = 0.0
+        best_val_f1 = -float('inf')
         best_weights = None
         patience_counter = 0
         for epoch in range(max_epochs):
@@ -228,7 +230,7 @@ def evaluate_gcn(
     metric="f1",
     n_components=5,
 ):
-    'Training loop per modelli custom-input (gcnmi, gcnmf_pe, gcnmf_pe_full, gcnmf_lf,'
+    'Training loop per modelli custom-input (gcnmi, PEMix, PEMix_full, gcnmf_lf,'
 
 
     accs, losses, f1s, rocaucs = [], [], [], []
@@ -248,10 +250,10 @@ def evaluate_gcn(
         edge_index = data.edge_index.to(device)
 
 
-        needs_nan = (mod in ("gcnmf_pe", "gcnmf_pe_full", "gcnmf_lf",
-                             "gcnmf_pe_gated", "gcnmf_pe_hybrid"))
+        needs_nan = (mod in ("PEMix", "PEMix_full", "gcnmf_lf",
+                             "PEMix_gated", "PEMix_hybrid"))
         if not needs_nan:
-            train_val_mask = train_mask | val_mask
+            train_val_mask = train_mask
             if torch.isnan(x).any():
                 x = fill_nan_with_col_mean_split(x, train_val_mask, test_mask)
 
@@ -264,23 +266,23 @@ def evaluate_gcn(
                 num_classes=data.num_classes, num_layers=2
             ).to(device)
 
-        elif mod == "gcnmf_pe":
+        elif mod == "PEMix":
 
 
             lr = 0.005
             hidden_channels = 16
             pe_dim = x.size(1) - data.num_features if hasattr(data, 'num_features') else 8
-            model = GCNmf_PE(data, nhid=hidden_channels, dropout=0.5,
+            model = PEMix(data, nhid=hidden_channels, dropout=0.0,
                              n_components=n_components, pe_dim=pe_dim,
                              init_x=x).to(device)
 
-        elif mod in ("gcnmf_pe_full", "gcnmf_pe_gated", "gcnmf_pe_hybrid"):
+        elif mod in ("PEMix_full", "PEMix_gated", "PEMix_hybrid"):
 
 
             lr = 0.005
             hidden_channels = 16
             pe_dim = x.size(1) - data.num_features if hasattr(data, 'num_features') else 8
-            model = GCNmf_PE_Full(data, nhid=hidden_channels, dropout=0.5,
+            model = PEMixFull(data, nhid=hidden_channels, dropout=0.5,
                                   n_components=n_components, pe_dim=pe_dim,
                                   init_x=x).to(device)
 
@@ -339,14 +341,14 @@ def evaluate_gcn(
 
         optimizer = torch.optim.Adam(model.parameters(), lr=lr)
 
-        best_val_f1 = 0.0
+        best_val_f1 = -float('inf')
         best_weights = None
         patience_counter = 0
 
 
         def _forward(m, x_in):
-            if mod in ("gcnmf_pe", "gcnmf_pe_full", "gcnmf_lf",
-                       "gcnmf_pe_gated", "gcnmf_pe_hybrid"):
+            if mod in ("PEMix", "PEMix_full", "gcnmf_lf",
+                       "PEMix_gated", "PEMix_hybrid"):
                 return m(x_in, data.adj.to(device), edge_index)
             return m(x_in, edge_index)
 
@@ -482,7 +484,7 @@ def evaluate_fp(
         val_mask = data.masks[seed]["val_mask"].to(device)
         test_mask = data.masks[seed]["test_mask"].to(device)
 
-        best_val_f1 = 0.0
+        best_val_f1 = -float('inf')
         best_weights = None
         patience_counter = 0
 
@@ -592,7 +594,7 @@ def evaluate_pcfi(
         val_mask = data.masks[seed]["val_mask"].to(device)
         test_mask = data.masks[seed]["test_mask"].to(device)
 
-        best_val_f1 = 0.0
+        best_val_f1 = -float('inf')
         best_weights = None
         patience_counter = 0
 

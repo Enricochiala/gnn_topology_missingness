@@ -8,7 +8,6 @@ from pathlib import Path
 import argparse
 import hashlib
 import json
-import ast
 import numpy as np
 import pandas as pd
 import scipy.sparse as sp
@@ -122,11 +121,7 @@ def load_raw(name, root):
         path = root/'pv_us.h5'
         df = pd.read_hdf(path,'actual').sort_index(axis=1, level=0)
         meta = pd.read_hdf(path,'metadata').sort_index()
-        # Read only the literal timezone mapping from the official loader.
-        tree = ast.parse(Path('research/sources/hdtts/lib/datasets/pv_us.py').read_text())
-        cls = next(n for n in tree.body if isinstance(n, ast.ClassDef))
-        mapping = ast.literal_eval(next(n.value for n in cls.body if isinstance(n,ast.Assign)
-                           and any(isinstance(t,ast.Name) and t.id=='tz_mapper' for t in n.targets)))
+        mapping = json.loads((Path(__file__).resolve().parent/'configs/pv_timezones.json').read_text())
         zones = meta.state.map(mapping)
         if zones.isna().any(): raise ValueError('Unmapped PV timezone')
         target_tz = zones.mode().iloc[0]

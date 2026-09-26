@@ -18,7 +18,6 @@ def main():
     p.add_argument('--data-dir',type=Path,default=ROOT/'data/temporal/prepared_v2')
     p.add_argument('--device',choices=['cpu','cuda'],default='cpu')
     p.add_argument('--batch-size',type=int,default=32)
-    p.add_argument('--extended-pemix',action='store_true')
     p.add_argument('--out',type=Path,required=True)
     a=p.parse_args();a.out=a.out.resolve();a.out.mkdir(parents=True,exist_ok=True)
     import fcntl
@@ -29,7 +28,6 @@ def main():
         common=['--datasets',ds,'--data-dir',str(a.data_dir.resolve()),'--models',*a.models,
                 '--mechanisms',*a.mechanisms,'--rates',*map(str,a.rates),'--device',a.device,
                 '--batch-size',str(a.batch_size)]
-        if a.extended_pemix:common+=['--extended-pemix']
         for phase in ['tune','test']:
             argv=[sys.executable,str(ROOT/'temporal_run.py'),*common,'--phase',phase,'--out',str(base/phase)]
             argv+=['--seeds','2026'] if phase=='tune' else ['--selection',str(base/'tune')]
